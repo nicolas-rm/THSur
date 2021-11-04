@@ -3,8 +3,8 @@
 
   <div class="card mt-2">
     <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item" *ngFor="let item of graficas | keyvalue; let i = index"
+      <div class="carousel-inner" (change)="detec($event)">
+        <div class="carousel-item" (change)="detec($event)" *ngFor="let item of graficas | keyvalue; let i = index"
           [ngClass]="item.value.active">
           <div class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400">
             <h4 class="card-title mt-2 p-3">
@@ -19,12 +19,12 @@
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="prev">
+        data-bs-slide="prev" (click)="detec($event)">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="next">
+        data-bs-slide="next" (click)="detec($event)">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>

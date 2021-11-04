@@ -85,8 +85,7 @@ export class TicketService {
       this.valores.total = Number(this.valores.total) + Number(value);
     }
 
-    //  // console.log('tornilleria');
-    //  // console.log(this.valores.total);
+    console.log('ENTRO 1');
   }
 
   refacciones(value: any): void {
@@ -98,6 +97,7 @@ export class TicketService {
       this.departamentos[0].totalrefacciones = Number(value);
       this.valores.total = Number(this.valores.total) + Number(value);
     }
+    console.log('ENTRO 2');
 
     //  // console.log('refacciones');
     //  // console.log(this.valores.total);
@@ -112,6 +112,7 @@ export class TicketService {
       this.departamentos[0].totalferreteria = Number(value);
       this.valores.total = Number(this.valores.total) + Number(value);
     }
+    console.log('ENTRO 3');
 
     //  // console.log('ferreteria');
     //  // console.log(this.valores.total);
@@ -126,6 +127,7 @@ export class TicketService {
       this.departamentos[0].totalservicios = Number(value);
       this.valores.total = Number(this.valores.total) + Number(value);
     }
+    console.log('ENTRO 4');
 
     //  // console.log('servicios');
     //  // console.log(this.valores.total);

@@ -44,8 +44,8 @@
               <label class="form-label">Importe De Apertura</label>
               <div class="input-group">
                 <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
-                <input id="importeInicio" type="number" class="form-control" placeholder="Importe De Apertura" name="apertura"
-                  [(ngModel)]="importe" (keydown.enter)="inicio()" >
+                <input id="importeInicio" type="number" class="form-control " placeholder="Importe De Apertura" name="apertura"
+                  [(ngModel)]="importe" (keydown.enter)="inicio()"  [attr.disabled]="disabled" >
               </div>
             </div>
             <div class="col-md-12 mt-5">
