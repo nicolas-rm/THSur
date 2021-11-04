@@ -1,0 +1,18 @@
+.toast {
+  width: 250px;
+}
+
+.fa-check {
+  font-size: 30px;
+  color: darkgreen;
+}
+.fa-times-circle {
+  font-size: 30px;
+  color: darkred;
+}
+.size-15 {
+  font-size: 12.5px;
+}
+.btn {
+  padding: 0;
+}

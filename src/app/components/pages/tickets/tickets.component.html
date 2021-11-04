@@ -1,0 +1,46 @@
+<app-sidebar-menu bankName="Registro De Tickets"></app-sidebar-menu>
+
+<div class="container card pt-5 mt-2" *ngIf="collectiones">
+  <div class="bd-example">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+      <label class="form-check-label" for="inlineCheckbox1"> Tickets Hoy</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+      <label class="form-check-label" for="inlineCheckbox2"> Tickets Ayer</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+      <label class="form-check-label" for="inlineCheckbox3"> Tickets Todos </label>
+    </div>
+  </div>
+  <div class="bd-example mt-2">
+    <div class="input-group">
+      <input type="text" class="form-control btn-lg" name="busqueda" placeholder="Ticket a Buscar">
+      <a class="btn btn-success"><i class="fas fa-search btn-lg"></i></a>
+    </div>
+    <table class="table table-borderless">
+      <thead>
+        <tr>
+          <th scope="col">#Folio</th>
+          <th scope="col">Cajero</th>
+          <th scope="col">Importe</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Imprimir</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of collectiones">
+          <th scope="row" class="mt-5">{{ item.folio }}</th>
+          <td class="mt-5"> Nicolas Rincon </td>
+          <td class="mt-5"> {{ item.total }}</td>
+          <td class="mt-5"> {{ item.fecha | date: 'dd/MM/yy, h:mm a' }} </td>
+          <td> <a class="btn btn-outline-danger"><i class="fas fa-print"></i></a> </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div>

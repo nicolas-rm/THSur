@@ -1,0 +1,124 @@
+<!-- <div class="container "> -->
+<!-- <div class="w-25"> -->
+<!-- <div class="w"> -->
+<!-- </div> -->
+<!-- <img class="text-center">TORNILLOS Y HERRAMIENTAS DEL SURESTE</> -->
+<!-- <h5 class="text-center" style="font-size: 15px;">17 Poniente #20AV C.P 30700</h5> -->
+<!-- <div> -->
+<div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" data-bs-keyboard="false"
+  aria-labelledby="exampleModalToggleLabel2" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel2">Previsualizacion Ticket</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="this.restablecer()"></button>
+      </div>
+      <div id="ticketPrint" class="modal-body ">
+        <div class="m-0 row justify-content-center ">
+          <div class="col-auto text-center ">
+            <img class="w-100" src="../../../../assets/img/logo-removido.png" alt="" srcset="">
+            <!-- <div class="container"> -->
+
+            <h5 class="size-15 m-1"> 17 Poniente #20-A C.P. 30700 </h5>
+            <h5 class="size-15 m-1"> (962) 626-2807 </h5>
+            <h5 class="size-15 m-1"> cruz_refacciones@hotmail.com </h5>
+            <h5 class="size-15 m-1 text-uppercase"> Regimen de incorporacion fiscal </h5>
+            <h5 class="size-15 m-1 text-uppercase"> CULM770421121 </h5>
+            <h5 class="size-15"> {{ date | date: 'medium' }} </h5>
+            <h5 class="size-15" *ngIf="this._ticket.valores.especial"> Abonos | Liquidaciones </h5>
+            <h5 class="size-15" *ngIf="!this._ticket.valores.especial"> Contado | Pagos Directos </h5>
+            <div class="table">
+              <div class="row card-header text-start">
+                <div class="col-3 fw-bold">Folio</div>
+                <div class="col-3 fw-bold">Cajero</div>
+                <div class="col-4 fw-bold text-start">Depart</div>
+                <div class="col-2 fw-bold text-end">Importe</div>
+              </div>
+              <div class="row card-body">
+                <div class="col-2">#{{ this._ticket.valores.folio }} </div>
+                <div class="col-4 text-end">Tornillos y Herramientas Sureste</div>
+                <div class="col-3">
+                  <div *ngIf="this._ticket.departamentos[0].tornilleria" class="col text-capitalize">
+                    tornilleria
+                  </div>
+                  <div *ngIf="this._ticket.departamentos[0].servicios" class="col text-capitalize">
+                    servicios
+                  </div>
+                  <div *ngIf="this._ticket.departamentos[0].refacciones" class="col text-capitalize">
+                    refacciones
+                  </div>
+                  <div *ngIf="this._ticket.departamentos[0].ferreteria" class="col text-capitalize">
+                    ferreteria
+                  </div>
+                </div>
+                <div class="col-3 text-end">
+                  <div *ngIf="this._ticket.departamentos[0].tornilleria" class="col">
+                    $ {{ this._ticket.departamentos[0].totaltornilleria }}
+                  </div>
+                  <div *ngIf="this._ticket.departamentos[0].servicios" class="col">
+                    $ {{ this._ticket.departamentos[0].totalservicios }}
+                  </div>
+                  <div *ngIf="this._ticket.departamentos[0].refacciones" class="col">
+                    $ {{ this._ticket.departamentos[0].totalrefacciones }}
+                  </div>
+                  <div *ngIf="this._ticket.departamentos[0].ferreteria" class="col">
+                    $ {{ this._ticket.departamentos[0].totalferreteria }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-end mb-1">
+              <div class="row">
+                <div class="col-md-6">
+                  <h5 class="size-15">Total: ${{ this._ticket.valores.total }}</h5>
+                </div>
+                <div class="col-md-6">
+                  <h5 class="size-15 text-capitalize">Modo Pago: {{ this._ticket.valores.modoPago }}</h5>
+                </div>
+              </div>
+              <div class="row" *ngIf="this._ticket.valores.pagoModo.efectivo">
+                <div class="col-md-6">
+                  <h5 class="size-15">Pago Con: ${{ this._ticket.valores.pago }}</h5>
+                </div>
+                <div class="col-md-6">
+                  <h5 class="size-15">Cambio: ${{ this._ticket.valores.cambio }}</h5>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="this._ticket.valores.especial">
+                <div class="col-md-6">
+                  <h5 class="size-15">Paga: ${{ this._ticket.valores.paga }}</h5>
+                </div>
+                <div class="col-md-6">
+                  <h5 class="size-15">Resta: ${{ this._ticket.valores.resta }}</h5>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12" *ngIf="this._ticket.valores.especial">
+                  <h5 class="size-15">Total Abonado ${{this._ticket.valores.Totalabonado}}</h5>
+                </div>
+              </div>
+              <div class="row" *ngIf="this._ticket.valores.especial">
+                <div class="col-6" *ngFor="let item of this._ticket.valores.abonado; let i = index">
+                  <h5 class="size-15" *ngIf="item">Abono ${{ item }}
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <h5 class="size-15"> Gracias por su compra </h5>
+            <h5 class="size-10"> Este total se incluye en la venta y factura del dia. </h5>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="ticketClose" class="btn btn-primary" data-bs-dismiss="modal"
+          (click)="this.restablecer()">Cerrar</button>
+        <button id="btnPrint" class="btn btn-primary" (click)="prinit()"
+          [disabled]="!this._ticket.valores.validate">Imprimir</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

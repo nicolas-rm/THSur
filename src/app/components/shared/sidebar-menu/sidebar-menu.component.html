@@ -1,0 +1,23 @@
+<div class="row">
+
+  <div class="col-4 text-start">
+    <h3 class="mt-2"> {{ bankName }} </h3>
+    <!-- <a class="btn btn-lgbtn-outline-danger btn-lg"><i class="fas fa-sign-out-alt"></i> Servicios</a> -->
+  </div>
+  <div class="col-4 text-center">
+    <div class="row">
+      <div class="col">
+        <h3 class="mt-2" style="font-size: 15px;"> {{ cajero }}</h3>
+      </div>
+    </div>
+    <div class="col">
+      <h3 class="mt-2" style="font-size: 15px;">
+        {{this._login.importe}} -
+        {{date | date: 'dd/MM/yy'}}</h3>
+    </div>
+
+  </div>
+  <div class="col-4 text-end mt-2">
+    <a class="btn btn-outline-danger "><i class="fas fa-sign-out-alt" (click)="cerrar()"></i> Cerrar caja</a>
+  </div>
+</div>

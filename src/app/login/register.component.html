@@ -1,0 +1,72 @@
+<div class="row m-0 vh-100">
+  <div class="col-7 p-0 text-center d-flex justify-content-center align-items-center display-none">
+    <img src="../../assets/svg/register2.svg" class="w-100">
+  </div>
+  <div class="col p-0 bg-custom d-flex justify-content-center align-items-center flex-column w-100">
+    <h5 class="form-label text-white container text-center">Crea tu cuenta Tornillos y Herramientas del Sureste</h5>
+    <form class="w-75" ngNativeValidate [formGroup]="Formulario" (ngSubmit)="registrarUsuario($event)">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="nombreInput" class="form-label">Nombre</label>
+            <input formControlName="nombre" name="nombre" required type="text" class="form-control btn-lg"
+              id="nombreInput" placeholder="Nombre" required>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="apellidosInput" class="form-label">Apellidos</label>
+            <input formControlName="apellidos" name="apellidos" required type="text" class="form-control btn-lg"
+              id="apellidosInput" placeholder="Apellidos" required>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="correoInput" class="form-label">Correo</label>
+        <input formControlName="correo" name="correo" required type="text" class="form-control btn-lg" id="correoInput"
+          placeholder="Correo" required>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="contrasena" class="form-label">Contraseña</label>
+            <div class="input-group">
+              <input formControlName="contrasena" name="contrasena" required id="password" type="Password"
+                Class="form-control btn-lg" placeholder="Contraseña" id="contrasena">
+              <div class="input-group-append">
+                <a id="show_password" class="btn btn-lg btn-dark form-control btn-lg"> <i class="fa fa-eye-slash"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="contrasena2" class="form-label">Confirmar Contraseña</label>
+            <div class="input-group">
+              <input formControlName="contrasena2" name="contrasena2" required type="password"
+                class="form-control btn-lg" id="contrasena2" placeholder="Confirmar Contraseña" required>
+              <div class="input-group-append">
+                <a id="show_password2" class="btn btn-lg btn-dark form-control btn-lg"> <i class="fa fa-eye-slash"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-check">
+            <input formControlName="condiciones" required class="form-check-input" type="checkbox" value=""
+              id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Terminos y condiciones
+            </label>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class=" btn btn-lg btn-custom btn-block mt-3" (click)="registrarUsuario($event)">Registrar</button>
+    </form>
+  </div>
+</div>

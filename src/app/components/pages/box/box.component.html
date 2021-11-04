@@ -1,0 +1,71 @@
+<div *ngIf="exist" id="idServices" class="container-fluid overflow-hidden ">
+  <!-- <div id="idServices" class="container-fluid overflow-hidden "> -->
+  <div class="row overflow-auto vh-100">
+    <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-secondary-color d-flex sticky-top">
+      <div
+        class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white">
+        <a class="d-flex align-items-center pb-sm-3 mb-md-0 me-md-auto text-white text-decoration-none">
+          <img src="../../../../assets/img/logo-removido.png" class="w-100 d-none d-sm-inline" alt="THSureste">
+        </a>
+        <ul
+          class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start"
+          id="menu">
+
+          <li *ngFor="let opcion of opciones" class="nav-item btn-lg" [routerLink]="[opcion.url]">
+            <a class="nav-link px-sm-0 px-2">
+              <i [class]="opcion.icono"></i><span class="ms-1 d-none d-sm-inline"> {{
+                opcion.titulo }} </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col d-flex flex-column main-page">
+      <main class="row overflow-auto mt-1">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="aperturaBox" aria-labelledby="exampleModalToggleLabel" data-bs-backdrop="static"
+  data-bs-keyboard="false" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title h4" id="exampleModalFullscreenLabel">Apertura De Caja</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          [routerLink]="['/inicio']" (click)="limpiar()"></button>
+      </div>
+      <div class="modal-body d-flex justify-content-center align-content-center h-50">
+        <div class="container mt-5 ">
+          <div class="row ">
+            <div class="col-md-12 mt-5">
+              <label class="form-label">Importe De Apertura</label>
+              <div class="input-group">
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input id="importeInicio" type="number" class="form-control" placeholder="Importe De Apertura" name="apertura"
+                  [(ngModel)]="importe" (keydown.enter)="inicio()" >
+              </div>
+            </div>
+            <div class="col-md-12 mt-5">
+              <label class="form-label">Nombre Del Cajero</label>
+              <div class="input-group">
+                <a class="btn btn-lg btn-dark"><i class="far fa-user btn-lg"></i></a>
+                <input type="text" class="form-control" placeholder="Nombre Cajero" name="cajero" disabled [value]="cajero">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-danger btn-lg" data-bs-dismiss="modal"
+          [routerLink]="['/inicio']" (click)="limpiar()">Cancelar</button>
+        <button id="importBTN" type="button" class="btn btn-lg btn-dark btn-lg" data-bs-dismiss="modal"
+          [disabled]="importe <= 0" (click)="inicio()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button id="aperturaBtn" type="button" class="btn btn-lg btn-custom  btn-block mt-3 d-none" data-bs-toggle="modal"
+  data-bs-target="#aperturaBox">Registrar</button>

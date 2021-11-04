@@ -1,1 +1,139 @@
 /* You can add global styles to this file, and also import other style files */
+
+.bg-custom {
+  background-color: #3e3d56;
+  /* color: #fff; */
+}
+
+.vh-90 {
+  height: 90vh !important;
+}
+
+.vh-10 {
+  height: 10vh !important;
+}
+
+.wh-90 {
+  width: 90vh !important;
+}
+
+.wh-10 {
+  width: 10vh !important;
+}
+
+.white {
+  color: white;
+}
+
+.size-10 {
+  font-size: 10px;
+}
+
+.size-15 {
+  font-size: 15px;
+}
+
+.size-20 {
+  font-size: 20px;
+}
+
+.size-25 {
+  font-size: 25px;
+}
+
+.size-30 {
+  font-size: 30px;
+}
+
+.size-35 {
+  font-size: 35px;
+}
+
+.size-40 {
+  font-size: 40px;
+}
+
+/* --------------- */
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .modal-content * {
+    visibility: visible;
+    overflow: visible;
+  }
+  .main-page * {
+    visibility: hidden;
+    /* display: none; */
+  }
+  .modal * {
+    /* position: absolute; */
+    /* left: 0; */
+    /* top: 0; */
+    /* margin: 0; */
+    /* padding: 0; */
+    min-height: 0px;
+    visibility: visible;
+    overflow: visible !important;
+    font-size: 10px;
+    /* width: 0; */
+    /* padding-right: 0; */
+    /* padding-left: 0; */
+    /* margin-right: 0; */
+    /* margin-left: 0; */
+    /* font-size: 10px; */
+    /* Remove scrollbar for printing. */
+  }
+  .modal-dialog {
+    visibility: visible !important;
+    overflow: visible !important;
+    /* Remove scrollbar for printing. */
+  }
+  .modal-header {
+    display: none;
+    visibility: hidden;
+  }
+  .modal-footer {
+    display: none;
+    visibility: hidden;
+  }
+  .m-1 {
+    margin: 0;
+  }
+}
+
+.bg-secondary-color {
+  background: #1d2228;
+}
+
+.nav-link {
+  color: #fff;
+}
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  box-sizing: border-box;
+  /* color: #44585d; */
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}

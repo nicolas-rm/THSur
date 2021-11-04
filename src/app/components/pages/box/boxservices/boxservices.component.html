@@ -1,0 +1,22 @@
+<app-sidebar-menu bankName="Caja Principal"></app-sidebar-menu>
+<!-- <hr /> -->
+
+<!-- <div class=""> -->
+
+<input required type="text" class="calculator-screen mt-2 btn-lg col-auto" placeholder="0" [value]="operacion"
+  disabled />
+
+<div class="calculator-keys pt-3">
+  <button *ngFor="let item of operadores" type="button" [class]="item.class" [value]="item.valor"
+    (click)="operaciones(item.valor)"> {{ item.operador }} <i *ngIf="item.font" [class]="item.icon"></i> </button>
+
+  <button *ngFor="let marcador of marcadores; let i=index" type="button" [value]="marcador.valor"
+    [class]="marcador.class" (click)="operaciones(marcador.valor)" [attr.data-bs-toggle]="marcador.modal"
+    [attr.data-bs-target]="marcador.target"> {{
+    marcador.accion }}
+  </button>
+
+</div>
+<!-- </div> -->
+<app-modal></app-modal>
+<app-notificaciones></app-notificaciones>
