@@ -10,99 +10,164 @@ import { TicketService } from 'src/app/services/index.service';
 })
 export class EstadisticasService {
   private documents!: AngularFirestoreCollection<Departamentos>;
+  departamentos = { totaltornilleria: 0, totalservicios: 0, totalrefacciones: 0, totalferreteria: 0 };
   constructor(private FireStore: AngularFirestore, private ticket: TicketService) { }
 
   dailyReport(collection: string) {
     this.documents = this.FireStore.collection<Departamentos>(collection);
     return this.documents.snapshotChanges().pipe(map((resp) => {
-      const departamentos = [
-        { tornilleria: false, departamento: 'tornilleria', totaltornilleria: 0 },
-        { servicios: false, departamento: 'servicios', totalservicios: 0 },
-        { refacciones: false, departamento: 'refacciones', totalrefacciones: 0 },
-        { ferreteria: false, departamento: 'ferreteria', totalferreteria: 0 }
-      ];
+
       for (let index = 0; index < resp.length; index++) {
-        const element = resp[index].payload.doc.data();
-
-        if (collection === 'THSureste-Abonos') {
-          if (element.resta === 0) {
-            for (let i = 0; i < element.departamento.length; i++) {
-              const dep = element.departamento[i];
-              this.assignation(dep, element, i);
-
+        let element = resp[index].payload.doc.data();
+        const departament = element.departamento;
+        const totales = element.totales;
+        for (let i = 0; i < departament.length; i++) {
+          const valor = departament[i];
+          const total = totales[i];
+          if (element.resta == 0) {
+            if (valor == 'Tornilleria') {
+              this.tornilleria(total);
+            } else if (valor == 'Servicios') {
+              this.servicios(total);
+            } else if (valor == 'Refacciones') {
+              this.refacciones(total);
+            } else if (valor == 'Ferreteria') {
+              this.ferreteria(total);
             }
           }
-        }
-        if (collection === 'THSureste-Contado') {
-          for (let i = 0; i < element.departamento.length; i++) {
-            const dep = element.departamento[i];
-            this.assignation(dep, element, i);
-          }
+
         }
       }
-      departamentos[0] = this.ticket.departamentos[0];
-      this.ticket.restablecer();
-      return departamentos;
+      return this.departamentos;
     }));
   }
 
-  weeklyReport() {
+  weeklyReport(collection: string) {
+    this.documents = this.FireStore.collection<Departamentos>(collection);
+    return this.documents.snapshotChanges().pipe(map((resp) => {
 
+      for (let index = 0; index < resp.length; index++) {
+        let element = resp[index].payload.doc.data();
+        const departament = element.departamento;
+        const totales = element.totales;
+        for (let i = 0; i < departament.length; i++) {
+          const valor = departament[i];
+          const total = totales[i];
+          if (element.resta == 0) {
+            if (valor == 'Tornilleria') {
+              this.tornilleria(total);
+            } else if (valor == 'Servicios') {
+              this.servicios(total);
+            } else if (valor == 'Refacciones') {
+              this.refacciones(total);
+            } else if (valor == 'Ferreteria') {
+              this.ferreteria(total);
+            }
+          }
+
+        }
+      }
+      return this.departamentos;
+    }));
   }
 
-  monthlyReport() {
+  monthlyReport(collection: string) {
+    this.documents = this.FireStore.collection<Departamentos>(collection);
+    return this.documents.snapshotChanges().pipe(map((resp) => {
 
+      for (let index = 0; index < resp.length; index++) {
+        let element = resp[index].payload.doc.data();
+        const departament = element.departamento;
+        const totales = element.totales;
+        for (let i = 0; i < departament.length; i++) {
+          const valor = departament[i];
+          const total = totales[i];
+          if (element.resta == 0) {
+            if (valor == 'Tornilleria') {
+              this.tornilleria(total);
+            } else if (valor == 'Servicios') {
+              this.servicios(total);
+            } else if (valor == 'Refacciones') {
+              this.refacciones(total);
+            } else if (valor == 'Ferreteria') {
+              this.ferreteria(total);
+            }
+          }
+
+        }
+      }
+      return this.departamentos;
+    }));
   }
 
   generalReport(collection: string) {
     this.documents = this.FireStore.collection<Departamentos>(collection);
     return this.documents.snapshotChanges().pipe(map((resp) => {
-      const departamentos = [
-        { tornilleria: false, departamento: 'tornilleria', totaltornilleria: 0 },
-        { servicios: false, departamento: 'servicios', totalservicios: 0 },
-        { refacciones: false, departamento: 'refacciones', totalrefacciones: 0 },
-        { ferreteria: false, departamento: 'ferreteria', totalferreteria: 0 }
-      ];
-      for (let index = 0; index < resp.length; index++) {
-        const element = resp[index].payload.doc.data();
-        console.log(element);
-        if (collection == 'THSureste-Abonos') {
-          if (element.resta === 0) {
-            for (let i = 0; i < element.departamento.length; i++) {
-              const dep = element.departamento[i];
-              this.assignation(dep, element, i);
 
+      for (let index = 0; index < resp.length; index++) {
+        let element = resp[index].payload.doc.data();
+        const departament = element.departamento;
+        const totales = element.totales;
+        for (let i = 0; i < departament.length; i++) {
+          const valor = departament[i];
+          const total = totales[i];
+          if (element.resta == 0) {
+            if (valor == 'Tornilleria') {
+              this.tornilleria(total);
+            } else if (valor == 'Servicios') {
+              this.servicios(total);
+            } else if (valor == 'Refacciones') {
+              this.refacciones(total);
+            } else if (valor == 'Ferreteria') {
+              this.ferreteria(total);
             }
           }
-        }
-        if (collection == 'THSureste-Contado') {
-          for (let i = 0; i < element.departamento.length; i++) {
-            const dep = element.departamento[i];
-            this.assignation(dep, element, i);
-          }
+
         }
       }
-      departamentos[0] = this.ticket.departamentos[0];
-      this.ticket.restablecer();
-      console.log(departamentos);
-      return departamentos;
+      return this.departamentos;
     }));
   }
 
-  assignation(dep: string, element: Departamentos, i: number) {
-    if (dep == 'Tornilleria') {
-      this.ticket.tornilleria(element.totales[i]);
+  tornilleria(value: number): void {
+
+
+    if (this.departamentos.totaltornilleria) {
+      this.departamentos.totaltornilleria = Number(this.departamentos.totaltornilleria) + Number(value);
+    } else {
+      this.departamentos.totaltornilleria = Number(value);
     }
-    if (dep == 'Ferreteria') {
-      this.ticket.ferreteria(element.totales[i]);
-    }
-    if (dep == 'Refacciones') {
-      this.ticket.refacciones(element.totales[i]);
-    }
-    if (dep == 'Servicios') {
-      this.ticket.servicios(element.totales[i]);
-    }
+
+    // console.log('ENTRO 1');
   }
 
+  refacciones(value: number): void {
+    // this.departamentos.refacciones = true;
+    if (this.departamentos.totalrefacciones) {
+      this.departamentos.totalrefacciones = Number(this.departamentos.totalrefacciones) + Number(value);
+    } else {
+      this.departamentos.totalrefacciones = Number(value);
+    }
+    // console.log('ENTRO 2');
+  }
 
+  ferreteria(value: number): void {
+    // this.departamentos.ferreteria = true;
+    if (this.departamentos.totalferreteria) {
+      this.departamentos.totalferreteria = Number(this.departamentos.totalferreteria) + Number(value);
+    } else {
+      this.departamentos.totalferreteria = Number(value);
+    }
+    // console.log('ENTRO 3');
+  }
+
+  servicios(value: number): void {
+    // this.departamentos.servicios = true;
+    if (this.departamentos.totalservicios) {
+      this.departamentos.totalservicios = Number(this.departamentos.totalservicios) + Number(value);
+    } else {
+      this.departamentos.totalservicios = Number(value);
+    }
+    // console.log('ENTRO 4');
+  }
 }

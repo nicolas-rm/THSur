@@ -11,89 +11,76 @@ import { EstadisticasService } from '../../../services/estadisticas.service';
   styleUrls: ['./estadisticas.component.css']
 })
 export class EstadisticasComponent implements OnInit {
-  generalReport = [
-    { tornilleria: false, departamento: 'tornilleria', totaltornilleria: 0 },
-    { servicios: false, departamento: 'servicios', totalservicios: 0 },
-    { refacciones: false, departamento: 'refacciones', totalrefacciones: 0 },
-    { ferreteria: false, departamento: 'ferreteria', totalferreteria: 0 }
-  ];
-  monthlyReport = [
-    { tornilleria: false, departamento: 'tornilleria', totaltornilleria: 0 },
-    { servicios: false, departamento: 'servicios', totalservicios: 0 },
-    { refacciones: false, departamento: 'refacciones', totalrefacciones: 0 },
-    { ferreteria: false, departamento: 'ferreteria', totalferreteria: 0 }
-  ];
-  weeklyReport = [
-    { tornilleria: false, departamento: 'tornilleria', totaltornilleria: 0 },
-    { servicios: false, departamento: 'servicios', totalservicios: 0 },
-    { refacciones: false, departamento: 'refacciones', totalrefacciones: 0 },
-    { ferreteria: false, departamento: 'ferreteria', totalferreteria: 0 }
-  ];
-  dailyReport = [
-    { tornilleria: false, departamento: 'tornilleria', totaltornilleria: 0 },
-    { servicios: false, departamento: 'servicios', totalservicios: 0 },
-    { refacciones: false, departamento: 'refacciones', totalrefacciones: 0 },
-    { ferreteria: false, departamento: 'ferreteria', totalferreteria: 0 }
-  ];
-  // Pie
-  // public pieChartLabels: Label[] = ['Servicios: ' + '300', 'Ferreteria', 'Tornilleria General', 'Refacciones'];
-  // public pieChartData: number[] = [300, 500, 100, 100];
+  generalReport: Array<number> = [];
+  monthlyReport: Array<number> = [];
+  weeklyReport: Array<number> = [];
+  dailyReport: Array<number> = [];
+
   public pieChartType: ChartType = 'pie';
-  // public pieChartLegend = true;
-
-  // public pieChartColors = [
-  //   {
-  //     backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
-  //   },
-  // ];
-
+  public pieChartColors = [
+    {
+      backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)', 'rgba(0,0,0,255.3)'],
+    },
+  ];
   graficas = {
     grafica1: {
       Labels: ['Servicios', 'Ferreteria', 'Tornilleria General', 'Refacciones'],
-      Data: [300, 500, 100, 100],
+      Data: this.dailyReport,
       Type: this.pieChartType,
       Legend: 'Reporte Diario',
+      colors: this.pieChartColors,
       active: 'active'
     },
     grafica2: {
       Labels: ['Servicios', 'Ferreteria', 'Tornilleria General', 'Refacciones'],
-      Data: [300, 500, 100, 100],
+      Data: this.weeklyReport,
       Type: this.pieChartType,
       Legend: 'Reporte Semanal',
+      colors: this.pieChartColors,
       active: ''
     },
     grafica3: {
       Labels: ['Servicios', 'Ferreteria', 'Tornilleria General', 'Refacciones'],
-      Data: [300, 500, 100, 100],
+      Data: this.monthlyReport,
       Type: this.pieChartType,
       Legend: 'Reporte Mensual',
+      colors: this.pieChartColors,
       active: ''
 
     },
     grafica4: {
       Labels: ['Servicios', 'Ferreteria', 'Tornilleria General', 'Refacciones'],
-      Data: [Number(this.generalReport[0].totalservicios), Number(this.generalReport[0].totalferreteria), Number(this.generalReport[0].totaltornilleria), Number(this.generalReport[0].totalrefacciones)],
+      Data: this.generalReport,
       Type: this.pieChartType,
       Legend: 'Reporte Total',
+      colors: this.pieChartColors,
       active: ''
     }
   }
 
+
+
   constructor(private estadisticas: EstadisticasService) {
-    this.estadisticas.generalReport('THSureste-Abonos').subscribe((resp) => {
-      console.log(resp);
-      this.generalReport[0].totalferreteria = resp[0].totalferreteria;
-      this.generalReport[0].totalrefacciones = resp[0].totalrefacciones;
-      this.generalReport[0].totalservicios = resp[0].totalservicios;
-      this.generalReport[0].totaltornilleria = resp[0].totaltornilleria;
-    });
+
   }
 
   ngOnInit(): void {
-
+    this.estadisticas.generalReport('THSureste-Abonos').subscribe((resp) => {
+      this.generalReport.push(resp.totalferreteria);
+      this.generalReport.push(resp.totalrefacciones);
+      this.generalReport.push(resp.totalservicios);
+      this.generalReport.push(resp.totaltornilleria);
+    });
+    this.estadisticas.generalReport('THSureste-Contado').subscribe((resp) => {
+      this.generalReport[0] = this.generalReport[0] + resp.totalferreteria;
+      this.generalReport[1] = this.generalReport[1] + resp.totalrefacciones;
+      this.generalReport[2] = this.generalReport[2] + resp.totalservicios;
+      this.generalReport[3] = this.generalReport[3] + resp.totaltornilleria;
+    });
+    console.log(this.generalReport);
   }
 
   detec(event: any) {
-    console.log(event);
+    // console.log(event);
   }
 }

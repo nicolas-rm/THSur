@@ -19,8 +19,8 @@ export class SidebarMenuComponent implements OnInit {
       this.cajero = String(localStorage.getItem('name'));
       this.date = String(localStorage.getItem('date'));
 
-      console.log(new Date(this.date).toLocaleString().split(' '));
-      console.log(new Date().toLocaleString().split(' '));
+      // console.log(new Date(this.date).toLocaleString().split(' '));
+      // console.log(new Date().toLocaleString().split(' '));
       // console.log(new DatePipe(LOCALE_ID.toString()).transform(this.date, 'dd/MM/yy'));
       // if (new DatePipe('').transform('medium')) {
 
