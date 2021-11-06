@@ -15,7 +15,7 @@ export class EstadisticasComponent implements OnInit {
   monthlyReport: Array<number> = [];
   weeklyReport: Array<number> = [];
   dailyReport: Array<number> = [];
-
+  exist: boolean = false;
   public pieChartType: ChartType = 'pie';
   public pieChartColors = [
     {
@@ -61,26 +61,45 @@ export class EstadisticasComponent implements OnInit {
 
 
   constructor(private estadisticas: EstadisticasService) {
-
+    this.estadisticas.generalReport('THSureste-Abonos').subscribe((resp) => {
+      this.generalReport[0] = resp.totalservicios;
+      this.generalReport[1] = resp.totalferreteria;
+      this.generalReport[2] = resp.totaltornilleria;
+      this.generalReport[3] = resp.totalrefacciones;
+      console.log('SALIENDO DE ABONOS');
+      console.log(this.generalReport);
+    });
+    this.estadisticas.generalReport('THSureste-Contado').subscribe((resp) => {
+      this.generalReport[0] = resp.totalservicios;
+      this.generalReport[1] = resp.totalferreteria;
+      this.generalReport[2] = resp.totaltornilleria;
+      this.generalReport[3] = resp.totalrefacciones;
+      console.log('SALIENDO DE CONTADO');
+      console.log(this.generalReport);
+    });
+    this.estadisticas.monthlyReport('THSureste-Abonos').subscribe((resp) => {
+      this.monthlyReport[0] = resp.totalservicios;
+      this.monthlyReport[1] = resp.totalferreteria;
+      this.monthlyReport[2] = resp.totaltornilleria;
+      this.monthlyReport[3] = resp.totalrefacciones;
+      console.log('SALIENDO DE ABONOS');
+      console.log(this.generalReport);
+    });
+    this.estadisticas.monthlyReport('THSureste-Contado').subscribe((resp) => {
+      this.monthlyReport[0] = resp.totalservicios;
+      this.monthlyReport[1] = resp.totalferreteria;
+      this.monthlyReport[2] = resp.totaltornilleria;
+      this.monthlyReport[3] = resp.totalrefacciones;
+      console.log('SALIENDO DE CONTADO');
+      console.log(this.monthlyReport);
+    });
   }
 
   ngOnInit(): void {
-    this.estadisticas.generalReport('THSureste-Abonos').subscribe((resp) => {
-      this.generalReport.push(resp.totalferreteria);
-      this.generalReport.push(resp.totalrefacciones);
-      this.generalReport.push(resp.totalservicios);
-      this.generalReport.push(resp.totaltornilleria);
-    });
-    this.estadisticas.generalReport('THSureste-Contado').subscribe((resp) => {
-      this.generalReport[0] = this.generalReport[0] + resp.totalferreteria;
-      this.generalReport[1] = this.generalReport[1] + resp.totalrefacciones;
-      this.generalReport[2] = this.generalReport[2] + resp.totalservicios;
-      this.generalReport[3] = this.generalReport[3] + resp.totaltornilleria;
-    });
-    console.log(this.generalReport);
+
   }
 
   detec(event: any) {
-    // console.log(event);
+    ////  console.log(event);
   }
 }

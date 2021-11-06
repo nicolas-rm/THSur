@@ -16,7 +16,7 @@ export class BoxservicesComponent implements OnInit {
     this.marcadores = this._box.marcadores;
   }
   ngOnInit(): void {
-    // console.log(this._menu.importe);
+    ////  console.log(this._menu.importe);
   }
 
   operaciones(value: any): void {

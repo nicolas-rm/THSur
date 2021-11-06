@@ -10,6 +10,8 @@ export class OperacionesService {
 
   operaciones(valores: TicketInterface) {
     if (valores.especial) {
+     //  console.log('entrando en especial');
+
       if (valores.total == valores.Totalabonado) {
         valores.resta = valores.total - valores.Totalabonado;
       }
@@ -56,26 +58,40 @@ export class OperacionesService {
       if (valores.pago == null) {
         valores.debe = 0;
       }
-     //  // console.log('OPERACIONES');
-     //  // console.log(valores.total);
     }
 
 
     if (!valores.especial) {
-      if (valores.total == null || valores.total < 0) {
-        valores.paga = 0;
-        valores.pago = 0;
+     //  console.log('entrando en normal');
+      if (valores.total == 0 || valores.total == null) {
+        valores.Totalabonado = 0;
+        valores.cambio = 0;
         valores.resta = 0;
         valores.debe = 0;
+        valores.paga = 0;
+        valores.pago = 0;
+      }
+      if (valores.pago == valores.total) {
         valores.cambio = 0;
+        valores.resta = 0;
+        valores.Totalabonado = valores.total;
+        valores.paga = valores.total;
+        // valores.abonado.push();
       }
       if (valores.pago > valores.total) {
         valores.cambio = valores.pago - valores.total;
-      } else {
-        valores.cambio = 0;
+        valores.resta = 0;
+        valores.Totalabonado = valores.total;
+        valores.paga = valores.total;
       }
+      if(valores.pago < valores.total){
+        valores.resta = valores.total - valores.pago;
+        valores.cambio = 0;
+        valores.Totalabonado = valores.pago;
+      }
+
     }
-    // ////  // console.log(valores);
+    // ////  ////  console.log(valores);
     return this.validaciones(valores);
   }
 

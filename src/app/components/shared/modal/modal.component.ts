@@ -137,20 +137,22 @@ export class ModalComponent implements OnInit {
 
   data() {
 
-    if (this._ticket.valores.Totalabonado == 0) {
-      this._ticket.valores.Totalabonado = this._ticket.valores.paga;
-      this._ticket.valores.resta = this._ticket.valores.total - this._ticket.valores.Totalabonado;
+    if (this._ticket.valores.especial) {
+      if (this._ticket.valores.Totalabonado == 0) {
+        this._ticket.valores.Totalabonado = this._ticket.valores.paga;
+        this._ticket.valores.resta = this._ticket.valores.total - this._ticket.valores.Totalabonado;
 
-    } else {
-      this._ticket.valores.Totalabonado = this._ticket.valores.Totalabonado + this._ticket.valores.paga;
-      this._ticket.valores.resta = this._ticket.valores.total - this._ticket.valores.Totalabonado;
+      } else {
+        this._ticket.valores.Totalabonado = this._ticket.valores.Totalabonado + this._ticket.valores.paga;
+        this._ticket.valores.resta = this._ticket.valores.total - this._ticket.valores.Totalabonado;
+      }
     }
 
     this._ticket.valores.abonado.push(this._ticket.valores.paga);
   }
 
   readCollection() {
-    // // console.log(this.ticket.total);
+    // ////  console.log(this.ticket.total);
     if (this._FireStore.update.folio === this._ticket.valores.folio) {
       return;
     } else {
@@ -158,7 +160,7 @@ export class ModalComponent implements OnInit {
     }
 
     this.copiarDatos();
-    // console.log('\n');
+    ////  console.log('\n');
     this._FireStore.readCollection(this._ticket.valores.especial, this._ticket.valores.folio).subscribe((documento: Departamentos[]) => {
       if (documento.length > 0) {
         this.configuracionDatos(documento[0]);
@@ -199,7 +201,7 @@ export class ModalComponent implements OnInit {
       this._ticket.valores.total = this.ticket.total;
       this._ticket.valores.validate = this.ticket.validate;
       this._ticket.departamentos = this.departamentos;
-      // console.log(this.ticket);
+      ////  console.log(this.ticket);
     } else {
       this._ticket.restablecerSpecial();
 
@@ -219,7 +221,7 @@ export class ModalComponent implements OnInit {
         this.servicios(ticket.totales[i]);
       }
     }
-    console.log(this._ticket.departamentos);
+   //  console.log(this._ticket.departamentos);
 
     this._ticket.valores.folio = ticket.folio;
     this._ticket.valores.abonado = ticket.abonos;
@@ -259,7 +261,7 @@ export class ModalComponent implements OnInit {
         this.ticket = this._ticket.valores;
         this.departamentos = this._ticket.departamentos;
 
-        // console.log(this.ticket);
+        ////  console.log(this.ticket);
       }
     }
     this._ticket.copiar = true;

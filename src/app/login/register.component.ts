@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
   }
 
   registrarUsuario(event: any) {
-    // console.log(event);
+    ////  console.log(event);
     if (this.Formulario.invalid) {
       return;
     }
@@ -66,7 +66,7 @@ export class RegisterComponent implements OnInit {
         this._router.navigate(['/inicio']);
       }
       if (resp && !this.exist) {
-        // console.log('USUARIO YA SE ENCUENTRA REGISTRADO');
+        ////  console.log('USUARIO YA SE ENCUENTRA REGISTRADO');
       }
 
     });

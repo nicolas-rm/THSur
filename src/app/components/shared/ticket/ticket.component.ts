@@ -29,13 +29,12 @@ export class TicketComponent implements OnInit {
   prinit() {
     const finish = this.saveCollection();
     const onbeforeprint = () => {
-      //  // console.log('Impresion en proceso!.');
+      //  ////  console.log('Impresion en proceso!.');
       finish;
       return true;
     };
 
     const onafterprint = () => {
-      //  // console.log('Impresion Terminada!.');
       finish;
       return true;
     };
@@ -43,7 +42,6 @@ export class TicketComponent implements OnInit {
     if (window.matchMedia) {
       var mediaQueryList = window.matchMedia('print');
       mediaQueryList.addListener((mql) => {
-        //  // console.log(mql);
         if (mql.matches) {
           onbeforeprint();
         } else {
@@ -100,7 +98,8 @@ export class TicketComponent implements OnInit {
       this.readCollection();
       if (this.exist) {
         this.createCollection(collection);
-      } else {
+      }
+      if (!this.exist) {
         this.restablecer();
         document.getElementById('ticketClose')?.click();
         this._FireStore.timerError('Folio Existente No Se Generara Ticket');
