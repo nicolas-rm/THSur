@@ -18,6 +18,56 @@
 
   </div>
   <div class="col-4 text-end mt-2">
-    <a class="btn btn-outline-danger "><i class="fas fa-sign-out-alt" (click)="cerrar()"></i> Cerrar caja</a>
+    <a class="btn btn-outline-danger " data-bs-toggle="modal" data-bs-target="#cerrarCaja"><i
+        class="fas fa-sign-out-alt"></i> Cerrar caja</a>
   </div>
 </div>
+
+<div class="modal fade" id="cerrarCaja" aria-labelledby="exampleModalToggleLabel" data-bs-backdrop="static"
+  data-bs-keyboard="false" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title h4" id="exampleModalFullscreenLabel"> CERRAR CAJA
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="title">
+              <h4>Estadisticas Mensuales</h4>
+            </div>
+            <div class="col-md-6 card m-2 p-2">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium" type="button">Servicios</button>
+                <input type="text" class="form-control" disabled>
+              </div>
+            </div>
+            <div class="col-md-6 card m-2 p-2">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium" type="button">Ferreteria</button>
+                <input type="text" class="form-control" disabled>
+              </div>
+            </div>
+            <div class="col-md-6 card m-2 p-2">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium" type="button">Tornilleria</button>
+                <input type="text" class="form-control" disabled>
+              </div>
+            </div>
+            <div class="col-md-6 card m-2 p-2">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium" type="button">Refacciones</button>
+                <input type="text" class="form-control" disabled>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#cerrarCaja"></a>

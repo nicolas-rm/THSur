@@ -10,7 +10,7 @@ export class BoxService {
     { operador: '-', valor: '-', class: 'button-cal btn btn-lg btn-outline-dark btn-lg' },
     { operador: '*', valor: '*', class: 'button-cal btn btn-lg btn-outline-dark btn-lg' },
     { operador: '/', valor: '/', class: 'button-cal btn btn-lg btn-outline-dark btn-lg' },
-    { valor: 'Delete', class: 'button-cal btn btn-lg btn-outline-dark btn-lg', icon: 'fas fa-backspace', font: true }
+    { valor: 'Delete', class: 'button-cal btn b-tn-lg btn-outline-dark btn-lg', icon: 'fas fa-backspace', font: true }
   ];
 
   marcadores: any = [

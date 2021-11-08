@@ -16,10 +16,11 @@ export class EstadisticasService {
 
   dailyReport(collection: string) {
     this.departamentos = this.departamentos = { totaltornilleria: 0, totalservicios: 0, totalrefacciones: 0, totalferreteria: 0 };
+
     const today = new Date((new Date().getFullYear()), (new Date().getMonth() + 1), (new Date().getDate())).toLocaleString().split(' ')[0];
-    this.documents = this.FireStore.collection<Departamentos>(collection, ref => ref.where('resta', '==', 0).where('fecha', '==', today));
+    this.documents = this.FireStore.collection<Departamentos>(collection, ref => ref.where('resta', '==', 0));
     return this.documents.valueChanges().pipe(map((resp) => {
-      this.assignation(resp);
+      this.assignation(resp, 'today');
       return this.departamentos;
     }));
   }
@@ -28,7 +29,7 @@ export class EstadisticasService {
     this.departamentos = this.departamentos = { totaltornilleria: 0, totalservicios: 0, totalrefacciones: 0, totalferreteria: 0 };
     this.documents = this.FireStore.collection<Departamentos>(collection, ref => ref.where('resta', '==', 0));
     return this.documents.valueChanges().pipe(map((resp) => {
-      this.assignation(resp);
+      this.assignation(resp), 'semanal';
       return this.departamentos;
     }));
   }
@@ -37,13 +38,12 @@ export class EstadisticasService {
     this.departamentos = this.departamentos = { totaltornilleria: 0, totalservicios: 0, totalrefacciones: 0, totalferreteria: 0 };
     const start = new Date((new Date().getFullYear()), (new Date().getMonth()), (new Date().getDate() - (new Date().getDate() - 1))).toLocaleString().split(' ')[0];
     const end = this.dateMonth(new Date().getMonth(), new Date().getFullYear()).toLocaleString().split(' ')[0];
+    const month1 = new Date().getMonth() + '/' + new Date().getFullYear();
+    const month2 = (new Date().getFullYear()) + '/' + (new Date().getMonth() + 1);
 
-    console.log(start);
-    console.log(end);
-    this.documents = this.FireStore.collection<Departamentos>(collection, ref => ref.where('resta', '==', 0).where('fecha', '>=', start)
-      .where('fecha', '<=', end));
+    this.documents = this.FireStore.collection<Departamentos>(collection, ref => ref.where('resta', '==', 0));
     return this.documents.valueChanges().pipe(map((resp) => {
-      this.assignation(resp);
+      this.assignation(resp, 'mensual');
       return this.departamentos;
     }));
   }
@@ -52,30 +52,85 @@ export class EstadisticasService {
     this.departamentos = this.departamentos = { totaltornilleria: 0, totalservicios: 0, totalrefacciones: 0, totalferreteria: 0 };
     this.documents = this.FireStore.collection<Departamentos>(collection, ref => ref.where('resta', '==', 0));
     return this.documents.valueChanges().pipe(map((resp) => {
-      // this.exist = false;
-      // if (!this.exist) {
-      this.assignation(resp);
-      // }
+      this.assignation(resp, 'todo');
       return this.departamentos;
     }));
   }
 
-  assignation(resp: Departamentos[]) {
-
+  assignation(resp: Departamentos[], seccion?: string) {
+    console.log(seccion);
     for (let index = 0; index < resp.length; index++) {
       // if (!this.exist) {
       for (let i = 0; i < resp[index].departamento.length; i++) {
-        if (resp[index].departamento[i] == 'Tornilleria') {
-          this.tornilleria(resp[index].totales[i]);
-        }
-        if (resp[index].departamento[i] == 'Servicios') {
-          this.servicios(resp[index].totales[i]);
-        }
-        if (resp[index].departamento[i] == 'Refacciones') {
-          this.refacciones(resp[index].totales[i]);
-        }
-        if (resp[index].departamento[i] == 'Ferreteria') {
-          this.ferreteria(resp[index].totales[i]);
+        if (resp[index].resta == 0) {
+          if (seccion) {
+            if (seccion == 'today') {
+              const hoy = new Date().toLocaleString().split(' ')[0];
+              console.log(hoy);
+              const date = new Date(convertTimestamp(resp[index].fecha)).toLocaleString().split(' ')[0];
+              console.log(date);
+              if (hoy == date) {
+                console.log('entro a hoy');
+                if (resp[index].departamento[i] == 'Tornilleria') {
+                  this.tornilleria(resp[index].totales[i]);
+                }
+                if (resp[index].departamento[i] == 'Servicios') {
+                  this.servicios(resp[index].totales[i]);
+                }
+                if (resp[index].departamento[i] == 'Refacciones') {
+                  this.refacciones(resp[index].totales[i]);
+                }
+                if (resp[index].departamento[i] == 'Ferreteria') {
+                  this.ferreteria(resp[index].totales[i]);
+                }
+              }
+            }
+            if (seccion == 'semanal') {
+              console.log('entro a semana');
+
+            }
+            if (seccion == 'mensual') {
+
+              let hoy = new Date().toLocaleString().split(' ')[0].split('/');
+              hoy[0] = hoy[2] + '/' + hoy[1];
+              // console.log(hoy[0]);
+              let date = new Date(convertTimestamp(resp[index].fecha)).toLocaleString().split(' ')[0].split('/');
+              date[0] = date[2] + '/' + date[1];
+              // console.log(date[0]);
+
+              if (hoy[0] == date[0]) {
+                console.log('entro a mensual');
+
+                if (resp[index].departamento[i] == 'Tornilleria') {
+                  this.tornilleria(resp[index].totales[i]);
+                }
+                if (resp[index].departamento[i] == 'Servicios') {
+                  this.servicios(resp[index].totales[i]);
+                }
+                if (resp[index].departamento[i] == 'Refacciones') {
+                  this.refacciones(resp[index].totales[i]);
+                }
+                if (resp[index].departamento[i] == 'Ferreteria') {
+                  this.ferreteria(resp[index].totales[i]);
+                }
+              }
+            }
+            if (seccion == 'todo') {
+              console.log('entro a todo');
+              if (resp[index].departamento[i] == 'Tornilleria') {
+                this.tornilleria(resp[index].totales[i]);
+              }
+              if (resp[index].departamento[i] == 'Servicios') {
+                this.servicios(resp[index].totales[i]);
+              }
+              if (resp[index].departamento[i] == 'Refacciones') {
+                this.refacciones(resp[index].totales[i]);
+              }
+              if (resp[index].departamento[i] == 'Ferreteria') {
+                this.ferreteria(resp[index].totales[i]);
+              }
+            }
+          }
         }
       }
       // if (index == resp.length) {

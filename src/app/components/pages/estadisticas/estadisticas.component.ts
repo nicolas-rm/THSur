@@ -66,32 +66,36 @@ export class EstadisticasComponent implements OnInit {
       this.generalReport[1] = resp.totalferreteria;
       this.generalReport[2] = resp.totaltornilleria;
       this.generalReport[3] = resp.totalrefacciones;
-      console.log('SALIENDO DE ABONOS');
-      console.log(this.generalReport);
     });
     this.estadisticas.generalReport('THSureste-Contado').subscribe((resp) => {
       this.generalReport[0] = resp.totalservicios;
       this.generalReport[1] = resp.totalferreteria;
       this.generalReport[2] = resp.totaltornilleria;
       this.generalReport[3] = resp.totalrefacciones;
-      console.log('SALIENDO DE CONTADO');
-      console.log(this.generalReport);
     });
     this.estadisticas.monthlyReport('THSureste-Abonos').subscribe((resp) => {
       this.monthlyReport[0] = resp.totalservicios;
       this.monthlyReport[1] = resp.totalferreteria;
       this.monthlyReport[2] = resp.totaltornilleria;
       this.monthlyReport[3] = resp.totalrefacciones;
-      console.log('SALIENDO DE ABONOS');
-      console.log(this.generalReport);
     });
     this.estadisticas.monthlyReport('THSureste-Contado').subscribe((resp) => {
       this.monthlyReport[0] = resp.totalservicios;
       this.monthlyReport[1] = resp.totalferreteria;
       this.monthlyReport[2] = resp.totaltornilleria;
       this.monthlyReport[3] = resp.totalrefacciones;
-      console.log('SALIENDO DE CONTADO');
-      console.log(this.monthlyReport);
+    });
+    this.estadisticas.dailyReport('THSureste-Abonos').subscribe((resp) => {
+      this.dailyReport[0] = resp.totalservicios;
+      this.dailyReport[1] = resp.totalferreteria;
+      this.dailyReport[2] = resp.totaltornilleria;
+      this.dailyReport[3] = resp.totalrefacciones;
+    });
+    this.estadisticas.dailyReport('THSureste-Contado').subscribe((resp) => {
+      this.dailyReport[0] = resp.totalservicios;
+      this.dailyReport[1] = resp.totalferreteria;
+      this.dailyReport[2] = resp.totaltornilleria;
+      this.dailyReport[3] = resp.totalrefacciones;
     });
   }
 
