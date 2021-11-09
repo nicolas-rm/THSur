@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app/firebase';
+import { Router } from '@angular/router';
 import { TicketService, ModoPagoService, BoxService } from 'src/app/services/index.service';
 import { FirebaseService } from '../../../services/firebase.service';
 import { Departamentos } from '../../interface/departamentos';
@@ -15,7 +16,13 @@ export class TicketComponent implements OnInit {
   date: number = Date.now();
   exist = true;
   abonosArray: Array<any> = [];
-  constructor(public _ticket: TicketService, private _modopago: ModoPagoService, private _box: BoxService, private _FireStore: FirebaseService) {
+  constructor(public _ticket: TicketService, private _modopago: ModoPagoService, private _box: BoxService, private _FireStore: FirebaseService, private router: Router) {
+
+    // if (localStorage.getItem('redirect')) {
+    //   if (localStorage.getItem('redirect') == 'true') {
+    //     this.router.navigate(['/estadisticas']);
+    //   }
+    // }
 
     for (let key in this._ticket.valores.abonado) {
       this.abonosArray.push({ abono: this._ticket.valores.abonado[key] });

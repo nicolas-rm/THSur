@@ -18,7 +18,7 @@
 
   </div>
   <div class="col-4 text-end mt-2">
-    <a class="btn btn-outline-danger " data-bs-toggle="modal" data-bs-target="#cerrarCaja"><i
+    <a class="btn btn-outline-danger " data-bs-toggle="modal" data-bs-target="#cerrarCaja" (click)="detec()"><i
         class="fas fa-sign-out-alt"></i> Cerrar caja</a>
   </div>
 </div>
@@ -33,39 +33,126 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="container">
-          <div class="row">
-            <div class="title">
-              <h4>Estadisticas Mensuales</h4>
+        <!-- <div class="container"> -->
+        <!-- <div class="row"> -->
+        <div class="row justify-content-center align-content-center text-center">
+          <div class="col-md-5 p-1">
+            <div class="title text-start">
+              <h4>Estadisticas Diarias</h4>
             </div>
-            <div class="col-md-6 card m-2 p-2">
+            <div class="col-md-10 m-1 p-1">
               <div class="input-group">
-                <button class="btn btn-dark text-white font-weight-medium" type="button">Servicios</button>
-                <input type="text" class="form-control" disabled>
+                <button class="btn btn-dark text-white font-weight-medium btn-lg" type="button">Servicios</button>
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input type="text" class="form-control btn-lg" disabled [value]="dailyReport[0]">
               </div>
             </div>
-            <div class="col-md-6 card m-2 p-2">
+            <div class="col-md-10 m-1 p-1">
               <div class="input-group">
-                <button class="btn btn-dark text-white font-weight-medium" type="button">Ferreteria</button>
-                <input type="text" class="form-control" disabled>
+                <button class="btn btn-dark text-white font-weight-medium btn-lg btn-lg "
+                  type="button">Ferreteria</button>
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input type="text" class="form-control btn-lg btn-lg" disabled [value]="dailyReport[1]">
               </div>
             </div>
-            <div class="col-md-6 card m-2 p-2">
+            <div class="col-md-10 m-1 p-1">
               <div class="input-group">
-                <button class="btn btn-dark text-white font-weight-medium" type="button">Tornilleria</button>
-                <input type="text" class="form-control" disabled>
+                <button class="btn btn-dark text-white font-weight-medium btn-lg" type="button">Tornilleria</button>
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input type="text" class="form-control btn-lg" disabled [value]="dailyReport[2]">
               </div>
             </div>
-            <div class="col-md-6 card m-2 p-2">
+            <div class="col-md-10 m-1 p-1">
               <div class="input-group">
-                <button class="btn btn-dark text-white font-weight-medium" type="button">Refacciones</button>
-                <input type="text" class="form-control" disabled>
+                <button class="btn btn-dark text-white font-weight-medium btn-lg" type="button">Refacciones</button>
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input type="text" class="form-control btn-lg" disabled [value]="dailyReport[3]">
               </div>
             </div>
 
           </div>
+          <div class="col-md-5 p-1">
+            <div class="title text-start">
+              <h4>Estadisticas Mensuales</h4>
+            </div>
+            <div class="col-md-10 m-1 p-1">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium btn-lg" type="button">Servicios</button>
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input type="text" class="form-control btn-lg" disabled [value]="dailyReport[0]">
+              </div>
+            </div>
+            <div class="col-md-10 m-1 p-1">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium btn-lg btn-lg "
+                  type="button">Ferreteria</button>
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input type="text" class="form-control btn-lg btn-lg" disabled [value]="dailyReport[1]">
+              </div>
+            </div>
+            <div class="col-md-10 m-1 p-1">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium btn-lg" type="button">Tornilleria</button>
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input type="text" class="form-control btn-lg" disabled [value]="dailyReport[2]">
+              </div>
+            </div>
+            <div class="col-md-10 m-1 p-1">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium btn-lg" type="button">Refacciones</button>
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input type="text" class="form-control btn-lg" disabled [value]="dailyReport[3]">
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-5 p-1">
+            <div class="title text-start">
+              <h4>Estadisticas Generales</h4>
+            </div>
+            <div class="col-md-10 m-1 p-1">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium btn-lg" type="button">Servicios</button>
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input type="text" class="form-control btn-lg" disabled [value]="dailyReport[0]">
+              </div>
+            </div>
+            <div class="col-md-10 m-1 p-1">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium btn-lg btn-lg "
+                  type="button">Ferreteria</button>
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input type="text" class="form-control btn-lg btn-lg" disabled [value]="dailyReport[1]">
+              </div>
+            </div>
+            <div class="col-md-10 m-1 p-1">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium btn-lg" type="button">Tornilleria</button>
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input type="text" class="form-control btn-lg" disabled [value]="dailyReport[2]">
+              </div>
+            </div>
+            <div class="col-md-10 m-1 p-1">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium btn-lg" type="button">Refacciones</button>
+                <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
+                <input type="text" class="form-control btn-lg" disabled [value]="dailyReport[3]">
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-5 p-1">
+            <div class="title text-start">
+              <h4>Estadisticas</h4>
+            </div>
+
+            <!-- <app-estadisticas></app-estadisticas> -->
+          </div>
+
         </div>
       </div>
+      <!-- </div> -->
+      <!-- </div> -->
     </div>
   </div>
 </div>
