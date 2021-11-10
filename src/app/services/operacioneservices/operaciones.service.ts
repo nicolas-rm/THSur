@@ -10,7 +10,7 @@ export class OperacionesService {
 
   operaciones(valores: TicketInterface) {
     if (valores.especial) {
-     //  console.log('entrando en especial');
+     // //  console.log('entrando en especial');
 
       if (valores.total == valores.Totalabonado) {
         valores.resta = valores.total - valores.Totalabonado;
@@ -62,7 +62,7 @@ export class OperacionesService {
 
 
     if (!valores.especial) {
-     //  console.log('entrando en normal');
+     // //  console.log('entrando en normal');
       if (valores.total == 0 || valores.total == null) {
         valores.Totalabonado = 0;
         valores.cambio = 0;
@@ -91,7 +91,7 @@ export class OperacionesService {
       }
 
     }
-    // ////  ////  console.log(valores);
+    // ////  //// //  console.log(valores);
     return this.validaciones(valores);
   }
 

@@ -15,9 +15,16 @@ export class SidebarMenuComponent implements OnInit {
   date: string = '';
   @Input() bankName: string = '';
   generalReport: Array<number> = [];
+  general: Array<number> = [];
+
   monthlyReport: Array<number> = [];
+  monthly: Array<number> = [];
+
   weeklyReport: Array<number> = [];
+  weekly: Array<number> = [];
+
   dailyReport: Array<number> = [];
+  daily: Array<number> = [];
 
   constructor(public _login: LoginService, private _localstorage: LocalStorageService, private estadisticas: EstadisticasService) {
     if (localStorage.getItem('uid') && localStorage.getItem('email') && localStorage.getItem('date') && localStorage.getItem('import') && localStorage.getItem('name')) {
@@ -36,54 +43,47 @@ export class SidebarMenuComponent implements OnInit {
     this._localstorage.logOut();
   }
   detec() {
-    // this.detec()
+    this.restablecer();
+    this.estadisticas.dailyReport('THSureste-Abonos').subscribe((resp) => {
+      // console.log(resp);
+    });
+    this.estadisticas.dailyReport('THSureste-Contado').subscribe((resp) => {
+      // console.log(resp);
+      this.dailyReport = resp;
+      // this.estadisticas.exist = true;
+    });
+    this.estadisticas.weeklyReport('THSureste-Abonos').subscribe((resp) => {
+      // console.log(resp);
+    });
+    this.estadisticas.weeklyReport('THSureste-Contado').subscribe((resp) => {
+      // console.log(resp);
+      this.weeklyReport = resp;
+      // this.estadisticas.exist = true;
+    });
+    this.estadisticas.monthlyReport('THSureste-Abonos').subscribe((resp) => {
+      // console.log(resp);
+    });
+    this.estadisticas.monthlyReport('THSureste-Contado').subscribe((resp) => {
+      // console.log(resp);
+      this.monthlyReport = resp;
+      // this.estadisticas.exist = true;
+    });
+    this.estadisticas.generalReport('THSureste-Abonos').subscribe((resp) => {
+      // console.log(resp);
+    });
+    this.estadisticas.generalReport('THSureste-Contado').subscribe((resp) => {
+      // console.log(resp);
+      this.generalReport = resp;
+      this.estadisticas.exist = true;
+    });
+  }
+
+  restablecer() {
     this.estadisticas.dailyReportDatos = [];
     this.estadisticas.weeklyReportDatos = [];
     this.estadisticas.monthlyReportDatos = [];
     this.estadisticas.generalReportDatos = [];
-    this.estadisticas.dailyReport('THSureste-Abonos').subscribe((resp) => {
-      this.dailyReport[0] = (resp[0] == 0 || resp[0] == null) ? 0 : resp[0];
-      this.dailyReport[1] = (resp[1] == 0 || resp[1] == null) ? 0 : resp[1];
-      this.dailyReport[2] = (resp[2] == 0 || resp[2] == null) ? 0 : resp[2];
-      this.dailyReport[3] = (resp[3] == 0 || resp[3] == null) ? 0 : resp[3];
-      console.log(resp);
-    });
-    this.estadisticas.dailyReport('THSureste-Contado').subscribe((resp) => {
-      this.dailyReport[0] = (resp[0] == 0 || resp[0] == null) ? 0 : resp[0];
-      this.dailyReport[1] = (resp[1] == 0 || resp[1] == null) ? 0 : resp[1];
-      this.dailyReport[2] = (resp[2] == 0 || resp[2] == null) ? 0 : resp[2];
-      this.dailyReport[3] = (resp[3] == 0 || resp[3] == null) ? 0 : resp[3];
-      console.log(resp);
-    });
-    this.estadisticas.monthlyReport('THSureste-Abonos').subscribe((resp) => {
-      this.monthlyReport[0] = (resp[0] == 0 || resp[0] == null) ? 0 : resp[0];
-      this.monthlyReport[1] = (resp[1] == 0 || resp[1] == null) ? 0 : resp[1];
-      this.monthlyReport[2] = (resp[2] == 0 || resp[2] == null) ? 0 : resp[2];
-      this.monthlyReport[3] = (resp[3] == 0 || resp[3] == null) ? 0 : resp[3];
-      // console.log(resp);
-    });
-    this.estadisticas.monthlyReport('THSureste-Contado').subscribe((resp) => {
-      this.monthlyReport[0] = (resp[0] == 0 || resp[0] == null) ? 0 : resp[0];
-      this.monthlyReport[1] = (resp[1] == 0 || resp[1] == null) ? 0 : resp[1];
-      this.monthlyReport[2] = (resp[2] == 0 || resp[2] == null) ? 0 : resp[2];
-      this.monthlyReport[3] = (resp[3] == 0 || resp[3] == null) ? 0 : resp[3];
-      // console.log(resp);
-    });
-
-    this.estadisticas.generalReport('THSureste-Abonos').subscribe((resp) => {
-      this.generalReport[0] = (resp[0] == 0 || resp[0] == null) ? 0 : resp[0];
-      this.generalReport[1] = (resp[1] == 0 || resp[1] == null) ? 0 : resp[1];
-      this.generalReport[2] = (resp[2] == 0 || resp[2] == null) ? 0 : resp[2];
-      this.generalReport[3] = (resp[3] == 0 || resp[3] == null) ? 0 : resp[3];
-      // console.log(resp);
-    });
-    this.estadisticas.generalReport('THSureste-Contado').subscribe((resp) => {
-      this.generalReport[0] = (resp[0] == 0 || resp[0] == null) ? 0 : resp[0];
-      this.generalReport[1] = (resp[1] == 0 || resp[1] == null) ? 0 : resp[1];
-      this.generalReport[2] = (resp[2] == 0 || resp[2] == null) ? 0 : resp[2];
-      this.generalReport[3] = (resp[3] == 0 || resp[3] == null) ? 0 : resp[3];
-      // console.log(resp);
-    });
+    this.estadisticas.exist = false;
 
   }
 }

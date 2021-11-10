@@ -115,6 +115,8 @@
       <div class="modal-footer">
         <button id="ticketClose" class="btn btn-primary" data-bs-dismiss="modal"
           (click)="this.restablecer()">Cerrar</button>
+        <button id="btnPrint" class="btn btn-primary" (click)="saveCollection()"
+          [disabled]="!this._ticket.valores.validate">Guardar</button>
         <button id="btnPrint" class="btn btn-primary" (click)="prinit()"
           [disabled]="!this._ticket.valores.validate">Imprimir</button>
       </div>

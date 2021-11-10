@@ -1,5 +1,6 @@
 export interface Departamentos {
   folio: string;/* 141151 */
+  cajero: string;
   departamento: Array<string>;/* Tornilleria General */
   total: number; /* 1500 */
   totales: Array<number>; /* [100, 500, 600, 300] */
@@ -10,6 +11,7 @@ export interface Departamentos {
   pago: number;
   paga: number;
   cambio: number;
+  modoPago: string;
 }
 
 

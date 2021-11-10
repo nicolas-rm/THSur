@@ -36,7 +36,7 @@ export class TicketComponent implements OnInit {
   prinit() {
     const finish = this.saveCollection();
     const onbeforeprint = () => {
-      //  ////  console.log('Impresion en proceso!.');
+      //  //// //  console.log('Impresion en proceso!.');
       finish;
       return true;
     };
@@ -79,6 +79,8 @@ export class TicketComponent implements OnInit {
 
   saveCollection() {
     const collection: Departamentos = {
+      modoPago: this._ticket.valores.modoPago,
+      cajero: String(localStorage.getItem('name')),
       departamento: this.departamentos(),
       total: this._ticket.valores.total,
       totales: this.importes(),
