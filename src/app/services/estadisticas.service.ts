@@ -27,6 +27,26 @@ export class EstadisticasService {
     this.documents = this.FireStore.collection<Departamentos>(collection);
     return this.documents.valueChanges().pipe(map((resp) => {
       this.assignation(resp, 'today');
+      if (this.dailyReportDatos.length == 0 || this.dailyReportDatos.length < 0 || this.dailyReportDatos.length == null || this.dailyReportDatos == [] || !this.dailyReportDatos) {
+        this.dailyReportDatos[0] = 0;
+        this.dailyReportDatos[1] = 0;
+        this.dailyReportDatos[2] = 0;
+        this.dailyReportDatos[3] = 0;
+      }
+
+      if (!this.dailyReportDatos[0]) {
+        this.dailyReportDatos[0] = 0;
+      }
+      if (!this.dailyReportDatos[1]) {
+        this.dailyReportDatos[1] = 0;
+      }
+      if (!this.dailyReportDatos[2]) {
+        this.dailyReportDatos[2] = 0;
+      }
+      if (!this.dailyReportDatos[3]) {
+        this.dailyReportDatos[3] = 0;
+      }
+      console.log(this.dailyReportDatos);
       return this.dailyReportDatos;
     }));
   }
@@ -35,6 +55,12 @@ export class EstadisticasService {
     this.documents = this.FireStore.collection<Departamentos>(collection);
     return this.documents.valueChanges().pipe(map((resp) => {
       this.assignation(resp), 'semanal';
+      if (this.weeklyReportDatos.length < 0 || this.weeklyReportDatos.length == null || this.weeklyReportDatos == [] || this.weeklyReportDatos.length == 0) {
+        this.weeklyReportDatos[0] = 0;
+        this.weeklyReportDatos[1] = 0;
+        this.weeklyReportDatos[2] = 0;
+        this.weeklyReportDatos[3] = 0;
+      }
       return this.weeklyReportDatos;
     }));
   }
@@ -43,6 +69,25 @@ export class EstadisticasService {
     this.documents = this.FireStore.collection<Departamentos>(collection);
     return this.documents.valueChanges().pipe(map((resp) => {
       this.assignation(resp, 'mensual');
+      if (this.monthlyReportDatos.length < 0 || this.monthlyReportDatos.length == null || this.weeklyReportDatos == [] || this.weeklyReportDatos.length == 0) {
+        this.monthlyReportDatos[0] = 0;
+        this.monthlyReportDatos[1] = 0;
+        this.monthlyReportDatos[2] = 0;
+        this.monthlyReportDatos[3] = 0;
+      }
+
+      if(!this.monthlyReportDatos[0]){
+        this.monthlyReportDatos[0] = 0;
+      }
+      if(!this.monthlyReportDatos[1]){
+        this.monthlyReportDatos[1] = 0;
+      }
+      if(!this.monthlyReportDatos[2]){
+        this.monthlyReportDatos[2] = 0;
+      }
+      if(!this.monthlyReportDatos[3]){
+        this.monthlyReportDatos[3] = 0;
+      }
       return this.monthlyReportDatos;
     }));
   }
@@ -51,6 +96,25 @@ export class EstadisticasService {
     this.documents = this.FireStore.collection<Departamentos>(collection);
     return this.documents.valueChanges().pipe(map((resp) => {
       this.assignation(resp, 'todo');
+      if (this.generalReportDatos.length < 0 || this.generalReportDatos.length == null || this.weeklyReportDatos == [] || this.weeklyReportDatos.length == 0) {
+        this.generalReportDatos[0] = 0;
+        this.generalReportDatos[1] = 0;
+        this.generalReportDatos[2] = 0;
+        this.generalReportDatos[3] = 0;
+      }
+
+      if(!this.generalReportDatos[0]){
+        this.generalReportDatos[0] = 0;
+      }
+      if(!this.generalReportDatos[1]){
+        this.generalReportDatos[1] = 0;
+      }
+      if(!this.generalReportDatos[2]){
+        this.generalReportDatos[2] = 0;
+      }
+      if(!this.generalReportDatos[3]){
+        this.generalReportDatos[3] = 0;
+      }
       return this.generalReportDatos;
     }));
   }
@@ -113,7 +177,6 @@ export class EstadisticasService {
 
               if (hoy[0] == date[0]) {
                 ////  console.log('entro a mensual');
-
                 if (resp[index].departamento[i] == 'Tornilleria') {
                   if (this.monthlyReportDatos[0]) {
                     this.monthlyReportDatos[0] += resp[index].totales[i];

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app/firebase';
 import { Router } from '@angular/router';
 import { TicketService, ModoPagoService, BoxService } from 'src/app/services/index.service';
@@ -13,24 +13,22 @@ import { ModalComponent } from '../modal/modal.component';
 export class TicketComponent implements OnInit {
   // @HostListener('window:afterprint')
 
-  date: number = Date.now();
+  @Input() bankName: string = '';
+  date: any = Date.now();
   exist = true;
   abonosArray: Array<any> = [];
   constructor(public _ticket: TicketService, private _modopago: ModoPagoService, private _box: BoxService, private _FireStore: FirebaseService, private router: Router) {
-
-    // if (localStorage.getItem('redirect')) {
-    //   if (localStorage.getItem('redirect') == 'true') {
-    //     this.router.navigate(['/estadisticas']);
-    //   }
-    // }
-
     for (let key in this._ticket.valores.abonado) {
       this.abonosArray.push({ abono: this._ticket.valores.abonado[key] });
     }
+
   }
 
   ngOnInit(): void {
-
+    console.log(this._ticket.valores.fecha);
+    if (this._ticket.valores.fecha) {
+      this.date = this._ticket.valores.fecha;
+    }
   }
 
   prinit() {
@@ -70,6 +68,7 @@ export class TicketComponent implements OnInit {
       cambio: 'd-none',
     };
     this._FireStore.update.folio = ''
+    this._ticket.reimprimir = false;
     this._FireStore.update.exist = false;
     this._modopago.restablecer();
     this._ticket.restablecer();
@@ -79,6 +78,7 @@ export class TicketComponent implements OnInit {
 
   saveCollection() {
     const collection: Departamentos = {
+      especial: this._ticket.valores.especial,
       modoPago: this._ticket.valores.modoPago,
       cajero: String(localStorage.getItem('name')),
       departamento: this.departamentos(),
@@ -188,5 +188,9 @@ export class TicketComponent implements OnInit {
         this.exist = false;
       }
     });
+  }
+
+  reimprimir() {
+    window.print();
   }
 }

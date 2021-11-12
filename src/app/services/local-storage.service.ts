@@ -20,7 +20,6 @@ export class LocalStorageService {
 
     document.uid = hashSync(document.nombre + document.apellidos + document.contrasena + new Date());
     localStorage.setItem('name', String(`${document.nombre} ${document.apellidos}`));
-    localStorage.setItem('import', String(this._login.importe));
     localStorage.setItem('date', String(this._login.fecha));
     localStorage.setItem('email', String(document.correo));
     localStorage.setItem('uid', String(document.uid));

@@ -12,6 +12,7 @@ export interface Departamentos {
   paga: number;
   cambio: number;
   modoPago: string;
+  especial: boolean;
 }
 
 

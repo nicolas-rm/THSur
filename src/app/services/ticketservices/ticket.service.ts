@@ -5,6 +5,8 @@ import { TicketInterface } from 'src/app/components/interface/pago.interface';
   providedIn: 'root'
 })
 export class TicketService {
+
+  reimprimir: boolean = false;
   copiar: boolean = false;
   contador: number = 0;
   departamentos = [
@@ -27,6 +29,7 @@ export class TicketService {
     pago: 0,
     titulo: '',
     modoPago: '',
+    fecha: '',
     pagoModo: {
       debito: false,
       credito: false,

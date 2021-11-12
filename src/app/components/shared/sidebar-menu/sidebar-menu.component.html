@@ -10,12 +10,6 @@
         <h3 class="mt-2" style="font-size: 15px;"> {{ cajero }}</h3>
       </div>
     </div>
-    <div class="col">
-      <h3 class="mt-2" style="font-size: 15px;">
-        {{this._login.importe}} -
-        {{date | date: 'dd/MM/yy'}}</h3>
-    </div>
-
   </div>
   <div class="col-4 text-end mt-2">
     <a class="btn btn-outline-danger " data-bs-toggle="modal" data-bs-target="#cerrarCaja" (click)="detec()"><i
@@ -30,7 +24,11 @@
       <div class="modal-header">
         <h5 class="modal-title h4" id="exampleModalFullscreenLabel"> CERRAR CAJA
         </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="btn-group">
+          <a class="btn btn-primary btn-lg" (click)="detec()"><i class="fas fa-sync-alt"></i>
+            Actualizar</a>
+          <a class="btn" data-bs-dismiss="modal"><i class="fas fa-times"></i></a>
+        </div>
       </div>
       <div class="modal-body">
         <!-- <div class="container"> -->
@@ -140,12 +138,38 @@
           </div>
           <div class="col-md-5 p-1">
             <div class="title text-start">
-              <h4>Estadisticas</h4>
+              <h4>Estadisticas </h4>
+            </div>
+            <div class="col-md-10 m-1 p-1">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium " type="button">Cajero</button>
+                <a class="btn  btn-dark"><i class="fas fa-user-alt"></i></a>
+                <input type="text" class="form-control " disabled [value]="this.cajero">
+              </div>
+            </div>
+            <div class="col-md-10 m-1 p-1">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium   " type="button">Caja</button>
+                <a class="btn  btn-dark"><i class="fas fa-dollar-sign "></i></a>
+                <input type="text" class="form-control" disabled [value]="this.import">
+              </div>
+            </div>
+            <div class="col-md-10 m-1 p-1">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium " type="button">Entradas</button>
+                <a class="btn  btn-dark"><i class="fas fa-dollar-sign"></i></a>
+                <input type="text" class="form-control " disabled [value]="this.entrada">
+              </div>
+            </div>
+            <div class="col-md-10 m-1 p-1">
+              <div class="input-group">
+                <button class="btn btn-dark text-white font-weight-medium " type="button">Salidas</button>
+                <a class="btn  btn-dark"><i class="fas fa-dollar-sign "></i></a>
+                <input type="text" class="form-control " disabled [value]="salida">
+              </div>
             </div>
 
-            <!-- <app-estadisticas></app-estadisticas> -->
           </div>
-
         </div>
       </div>
       <div class="modal-footer">

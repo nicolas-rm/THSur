@@ -115,10 +115,12 @@
       <div class="modal-footer">
         <button id="ticketClose" class="btn btn-primary" data-bs-dismiss="modal"
           (click)="this.restablecer()">Cerrar</button>
-        <button id="btnPrint" class="btn btn-primary" (click)="saveCollection()"
+        <button id="btnPrint" *ngIf="!this._ticket.reimprimir" class="btn btn-primary" (click)="saveCollection()"
           [disabled]="!this._ticket.valores.validate">Guardar</button>
-        <button id="btnPrint" class="btn btn-primary" (click)="prinit()"
+        <button id="btnPrint" *ngIf="!this._ticket.reimprimir" class="btn btn-primary" (click)="prinit()"
           [disabled]="!this._ticket.valores.validate">Imprimir</button>
+        <button id="btnPrint" class="btn btn-primary"
+          *ngIf="this._ticket.reimprimir" (click)="reimprimir()">Reimprimir</button>
       </div>
     </div>
   </div>

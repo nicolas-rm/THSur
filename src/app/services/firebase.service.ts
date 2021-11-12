@@ -75,7 +75,9 @@ export class FirebaseService {
     return this.document.doc(folio).snapshotChanges().pipe(map((resp) => {
       const document: Array<Departamentos> = [];
       if (resp.payload.exists && folio != this.update.folio) {
-        document.push(resp.payload.data());
+        const doc = resp.payload.data();
+        doc.fecha = convertTimestamp(resp.payload.data().fecha);
+        document.push(doc);
       }
       return document;
     }));;

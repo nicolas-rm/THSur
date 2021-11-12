@@ -13,6 +13,11 @@ import { EstadisticasService } from '../../../services/estadisticas.service';
 export class SidebarMenuComponent implements OnInit {
   cajero: string = '';
   date: string = '';
+  import: number = 0;
+
+  entrada: number = 0;
+  salida: number = 0;
+
   @Input() bankName: string = '';
   generalReport: Array<number> = [];
   general: Array<number> = [];
@@ -30,6 +35,7 @@ export class SidebarMenuComponent implements OnInit {
     if (localStorage.getItem('uid') && localStorage.getItem('email') && localStorage.getItem('date') && localStorage.getItem('import') && localStorage.getItem('name')) {
       this.cajero = String(localStorage.getItem('name'));
       this.date = String(localStorage.getItem('date'));
+      this.import = Number(localStorage.getItem('import'));
     }
 
     this.detec();
@@ -76,6 +82,14 @@ export class SidebarMenuComponent implements OnInit {
       this.generalReport = resp;
       this.estadisticas.exist = true;
     });
+
+    if (this.dailyReport.length == 0) {
+      this.entrada = 0;
+    } else {
+      this.entrada = (this.dailyReport[0] + this.dailyReport[1] + this.dailyReport[2] + this.dailyReport[3]);
+    }
+    this.salida = 0;
+
   }
 
   restablecer() {

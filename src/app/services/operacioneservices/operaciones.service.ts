@@ -111,12 +111,12 @@ export class OperacionesService {
     }
     if (!valores.especial) {
       if (valores.modoPago == 'efectivo') {
-        if (String(valores.folio).length > 3 && valores.total > 0 && valores.pago >= valores.total && valores.folio != null && valores.folio != '' && valores.folio != '\n' && valores.folio != '\s' && valores.folio != '\t') {
+        if (String(valores.folio).length > 3 && valores.total > 0 && valores.pago >= valores.total && valores.folio != null && valores.folio != '' && valores.folio != '\n' && valores.folio != '\s' && valores.folio != '\t' ) {
           valores.validate = true;
         } else {
           valores.validate = false;
         }
-      } else if (String(valores.folio).length > 3 && valores.total > 0 && valores.folio != null && valores.folio != '' && valores.folio != '\n' && valores.folio != '\s' && valores.folio != '\t') {
+      } else if (String(valores.folio).length > 3 && valores.total > 0 && valores.folio != null && valores.folio != '' && valores.folio != '\n' && valores.folio != '\s' && valores.folio != '\t' && valores.modoPago != '') {
         valores.validate = true;
       } else {
         valores.validate = false;

@@ -82,7 +82,7 @@
                   <div class="col-md-9">
                     <div class="input-group">
                       <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
-                      <input autocomplete="off" required type="number" step="0.01" min="0" [max]="this._ticket.valores.total"
+                      <input id="pagaClean" autocomplete="off" (click)="clean('pagaClean')" required type="number" step="0.01" min="0" [max]="this._ticket.valores.total"
                         class="form-control btn-lg btn-lg" name="paga" placeholder="Abono | Finiquita"
                         [(ngModel)]="this._ticket.valores.paga" (keyup)="operaciones()">
                     </div>
@@ -97,7 +97,7 @@
                   <div class="col-md-9">
                     <div class="input-group">
                       <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
-                      <input autocomplete="off" required type="number" step="0.01" min="0" class="form-control btn-lg btn-lg" name="pago"
+                      <input id="pagoClean" autocomplete="off" (click)="clean('pagoClean')" required type="number" step="0.01" min="0" class="form-control btn-lg btn-lg" name="pago"
                         placeholder="Pago" [(ngModel)]="this._ticket.valores.pago" (keyup)="operaciones()">
                     </div>
                   </div>

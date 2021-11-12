@@ -20,7 +20,7 @@ export class EstadisticasComponent implements OnInit {
   public pieChartType: ChartType = 'pie';
   public pieChartColors = [
     {
-      backgroundColor: ['rgb(250, 241, 230)', 'rgb(255, 192, 116)', 'rgb(182, 200, 103)', 'rgb(1, 147, 124)'],
+      backgroundColor: ['rgb(32, 106, 93)', 'rgb(129, 178, 20)', 'rgb(255, 204, 41)', 'rgb(245, 134, 52)'],
     },
   ];
   graficas = {
@@ -29,14 +29,6 @@ export class EstadisticasComponent implements OnInit {
       Data: this.dailyReport,
       Type: this.pieChartType,
       Legend: 'Reporte Diario',
-      colors: this.pieChartColors,
-      active: ''
-    },
-    grafica2: {
-      Labels: ['Tornilleria', 'Servicios', 'Refacciones', 'Ferreteria'],
-      Data: this.weeklyReport,
-      Type: this.pieChartType,
-      Legend: 'Reporte Semanal',
       colors: this.pieChartColors,
       active: ''
     },

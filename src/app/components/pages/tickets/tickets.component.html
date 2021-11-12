@@ -17,8 +17,9 @@
   </div> -->
   <div class="bd-example mt-2">
     <div class="input-group">
-      <input type="text" class="form-control btn-lg" name="busqueda" placeholder="Ticket a Buscar">
-      <a class="btn btn-success"><i class="fas fa-search btn-lg"></i></a>
+      <input [(ngModel)]="folioSearch" type="text" class="form-control btn-lg" name="busqueda"
+        placeholder="Ticket a Buscar" (keydown.enter)="search(folioSearch)" (change)="search(folioSearch)">
+      <a class="btn btn-success" (click)="search(folioSearch)"><i class="fas fa-search btn-lg"></i></a>
     </div>
     <table class="table table-borderless">
       <thead>
@@ -37,8 +38,9 @@
           <td class="mt-5"> {{ item.cajero }} </td>
           <td class="mt-5"> ${{ item.total }}</td>
           <td class="mt-5"> {{ item.fecha | date: 'dd/MM/yy' }} </td>
-          <td> <a class="btn btn-outline-primary"><i class="fas fa-print"></i></a> </td>
-          <td> <a class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a> </td>
+          <td> <a class="btn btn-outline-dark " data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" (click)="load(item)"><i class="fas fa-print"></i></a></td>
+          <td> <a class="btn btn-outline-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"><i class="fas fa-trash"></i></a>
+          </td>
         </tr>
       </tbody>
 
@@ -46,3 +48,4 @@
   </div>
 
 </div>
+<app-ticket></app-ticket>

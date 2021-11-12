@@ -221,7 +221,7 @@ export class ModalComponent implements OnInit {
         this.servicios(ticket.totales[i]);
       }
     }
-   // //  console.log(this._ticket.departamentos);
+    // //  console.log(this._ticket.departamentos);
 
     this._ticket.valores.folio = ticket.folio;
     this._ticket.valores.abonado = ticket.abonos;
@@ -267,5 +267,10 @@ export class ModalComponent implements OnInit {
     this._ticket.copiar = true;
     this._ticket.contador = 1;
 
+  }
+
+  clean(id: string) {
+    var btn: any = document.getElementById(id);
+    btn.value = '';
   }
 }
