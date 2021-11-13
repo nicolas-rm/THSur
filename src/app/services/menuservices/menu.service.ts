@@ -7,24 +7,19 @@ export class MenuService {
   menu: any = [
     {
       titulo: 'Inicio',
-      icono: 'fas fa-tools',
+      icono: 'fas fa-home',
       url: '/principal'
     },
     {
       titulo: 'Tickets',
-      icono: 'fas fa-tools',
+      icono: 'fas fa-tags',
       url: '/tickets'
     },
     {
       titulo: 'Estadisticas',
-      icono: 'fas fa-tools',
+      icono: 'fas fa-chart-pie',
       url: '/estadisticas'
     },
-    {
-      titulo: 'Ventas',
-      icono: 'fas fa-tools',
-      url: '/ventas'
-    }
   ];
 
   importe: number = 0;

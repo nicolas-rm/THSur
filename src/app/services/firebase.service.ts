@@ -90,6 +90,11 @@ export class FirebaseService {
     return this.FireStore.collection(this.collection).doc(document.folio).set(document);
   }
 
+  deleteCollection(documentId: string, especial: boolean){
+    this.selectCollection(especial);
+    return this.FireStore.collection(this.collection).doc(documentId).delete();
+  }
+
   selectCollection(especial: boolean) {
     if (especial) {
       this.collection = 'THSureste-Abonos';

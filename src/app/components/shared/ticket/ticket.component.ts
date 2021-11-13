@@ -12,7 +12,7 @@ import { ModalComponent } from '../modal/modal.component';
 })
 export class TicketComponent implements OnInit {
   // @HostListener('window:afterprint')
-
+  cajero: string = ''
   @Input() bankName: string = '';
   date: any = Date.now();
   exist = true;
@@ -25,6 +25,8 @@ export class TicketComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.cajero = String(localStorage.getItem('name'));
     console.log(this._ticket.valores.fecha);
     if (this._ticket.valores.fecha) {
       this.date = this._ticket.valores.fecha;

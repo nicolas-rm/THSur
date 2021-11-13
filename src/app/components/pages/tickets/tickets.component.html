@@ -1,6 +1,6 @@
 <app-sidebar-menu bankName="Registro De Tickets"></app-sidebar-menu>
 
-<div class="container card pt-5 mt-2" *ngIf="collectiones">
+<div class="container card pt-5 mt-2">
   <!--   <div class="bd-example">
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
@@ -21,11 +21,11 @@
         placeholder="Ticket a Buscar" (keydown.enter)="search(folioSearch)" (change)="search(folioSearch)">
       <a class="btn btn-success" (click)="search(folioSearch)"><i class="fas fa-search btn-lg"></i></a>
     </div>
-    <table class="table table-borderless">
+    <table class="table table-borderless table-responsive">
       <thead>
         <tr>
           <th scope="col">#Folio</th>
-          <th scope="col">Cajero</th>
+          <th scope="col">Tipo</th>
           <th scope="col">Importe</th>
           <th scope="col">Fecha</th>
           <th scope="col">Imprimir</th>
@@ -33,13 +33,26 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of collectiones">
+        <tr *ngFor="let item of collectionesAbono">
           <th scope="row" class="mt-5">{{ item.folio }}</th>
-          <td class="mt-5"> {{ item.cajero }} </td>
+          <td class="mt-5"> Abono | Finiquitos </td>
           <td class="mt-5"> ${{ item.total }}</td>
           <td class="mt-5"> {{ item.fecha | date: 'dd/MM/yy' }} </td>
-          <td> <a class="btn btn-outline-dark " data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" (click)="load(item)"><i class="fas fa-print"></i></a></td>
-          <td> <a class="btn btn-outline-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"><i class="fas fa-trash"></i></a>
+          <td> <a class="btn btn-outline-dark " data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+              (click)="load(item)"><i class="fas fa-print"></i></a></td>
+          <td> <a class="btn btn-outline-primary" (click)="this.delete(item.folio, item.especial)"
+              data-bs-target="#staticBackdrop" data-bs-toggle="modal"><i class="fas fa-trash"></i></a>
+          </td>
+        </tr>
+        <tr *ngFor="let item of collectionesContado">
+          <th scope="row" class="mt-5">{{ item.folio }}</th>
+          <td class="mt-5"> Contado </td>
+          <td class="mt-5"> ${{ item.total }}</td>
+          <td class="mt-5"> {{ item.fecha | date: 'dd/MM/yy' }} </td>
+          <td> <a class="btn btn-outline-dark " data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+              (click)="load(item)"><i class="fas fa-print"></i></a></td>
+          <td> <a (click)="this.delete(item.folio, item.especial)" class="btn btn-outline-primary"
+              data-bs-target="#staticBackdrop" data-bs-toggle="modal"><i class="fas fa-trash"></i></a>
           </td>
         </tr>
       </tbody>
@@ -49,3 +62,37 @@
 
 </div>
 <app-ticket></app-ticket>
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Eliminar Ticket</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="card-title text-center">
+            <div class="title h3">
+              Estas Seguro Que Desea Eliminar El Ticket ?
+            </div>
+            <h5 class="h5 lead">Recuerde que al eliminar el ticket, usted tendra que devolver el dinero a la persona
+              ya sea se manera total o parcial, u en dado caso con un vale. dependera mucho de la situacion y el
+              porque se elimina el ticket</h5>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+          (click)="this.confirmarDelete()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

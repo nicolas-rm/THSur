@@ -20,6 +20,7 @@ import { ServicesModule } from './services/services.module';
 import { AbonosPipe } from './components/pipe/abonos.pipe';
 import { FirestoreDatePipe } from './components/pipe/firestore-date.pipe';
 import { ChartsModule } from 'ng2-charts';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 // import * as Charts from 'ng2-charts';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,7 +42,13 @@ import { ChartsModule } from 'ng2-charts';
     AngularFirestoreModule,
     ServicesModule,
     ReactiveFormsModule,
-    ChartsModule
+    ChartsModule,
+    // ServiceWorkerModule.register('ngsw-worker.js', {
+    //   enabled: environment.production,
+    //   // Register the ServiceWorker as soon as the app is stable
+    //   // or after 30 seconds (whichever comes first).
+    //   registrationStrategy: 'registerWhenStable:30000'
+    // })
     // BrowserAnimationsModule,
     // TooltipModule.forRoot()
   ],
