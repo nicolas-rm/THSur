@@ -33,14 +33,15 @@
         </tr>
       </thead>
       <tbody>
+
         <tr *ngFor="let item of collectionesAbono">
           <th scope="row" class="mt-5">{{ item.folio }}</th>
-          <td class="mt-5"> Abono | Finiquitos </td>
+          <td class="mt-5"> Abonos </td>
           <td class="mt-5"> ${{ item.total }}</td>
           <td class="mt-5"> {{ item.fecha | date: 'dd/MM/yy' }} </td>
-          <td> <a class="btn btn-outline-dark " data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+          <td> <a class="btn btn-outline-dark" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
               (click)="load(item)"><i class="fas fa-print"></i></a></td>
-          <td> <a class="btn btn-outline-primary" (click)="this.delete(item.folio, item.especial)"
+          <td> <a class="btn btn-outline-primary" (click)="this.delete(item.folio, item.especial, item.paga)"
               data-bs-target="#staticBackdrop" data-bs-toggle="modal"><i class="fas fa-trash"></i></a>
           </td>
         </tr>
@@ -49,9 +50,9 @@
           <td class="mt-5"> Contado </td>
           <td class="mt-5"> ${{ item.total }}</td>
           <td class="mt-5"> {{ item.fecha | date: 'dd/MM/yy' }} </td>
-          <td> <a class="btn btn-outline-dark " data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+          <td> <a class="btn btn-outline-dark" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
               (click)="load(item)"><i class="fas fa-print"></i></a></td>
-          <td> <a (click)="this.delete(item.folio, item.especial)" class="btn btn-outline-primary"
+          <td> <a (click)="this.delete(item.folio, item.especial, item.paga)" class="btn btn-outline-primary"
               data-bs-target="#staticBackdrop" data-bs-toggle="modal"><i class="fas fa-trash"></i></a>
           </td>
         </tr>

@@ -80,15 +80,22 @@ export class SidebarMenuComponent implements OnInit {
     this.estadisticas.generalReport('THSureste-Contado').subscribe((resp) => {
       // console.log(resp);
       this.generalReport = resp;
+      // this.estadisticas.exist = true;
+    });
+    this.estadisticas.entrys('THSureste-Abonos').subscribe((resp) => {
+
+    });
+    this.estadisticas.entrys('THSureste-Contado').subscribe((resp) => {
+      console.log(resp);
+      this.entrada = resp;
       this.estadisticas.exist = true;
     });
 
-    if (this.dailyReport.length == 0) {
-      this.entrada = 0;
-    } else {
-      this.entrada = (this.dailyReport[0] + this.dailyReport[1] + this.dailyReport[2] + this.dailyReport[3]);
+    if (localStorage.getItem('return')) {
+      const resta = Number(localStorage.getItem('return'));
+      this.salida = resta;
+      this.entrada = this.entrada - this.salida;
     }
-    this.salida = 0;
 
   }
 
@@ -98,6 +105,6 @@ export class SidebarMenuComponent implements OnInit {
     this.estadisticas.monthlyReportDatos = [];
     this.estadisticas.generalReportDatos = [];
     this.estadisticas.exist = false;
-
+    this.estadisticas.entrysDatos = 0;
   }
 }

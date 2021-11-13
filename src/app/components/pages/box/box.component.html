@@ -12,7 +12,7 @@
           id="menu">
 
           <li *ngFor="let opcion of opciones" class="nav-item btn-lg" [routerLink]="[opcion.url]">
-            <a class="nav-link px-sm-0 px-2">
+            <a class="nav-link px-sm-0 px-2" style="cursor:pointer;">
               <i [class]="opcion.icono"></i><span class="ms-1 d-none d-sm-inline"> {{
                 opcion.titulo }} </span>
             </a>
@@ -34,8 +34,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title h4" id="exampleModalFullscreenLabel">Apertura De Caja</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-          [routerLink]="['/inicio']" (click)="limpiar()"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" [routerLink]="['/inicio']"
+          (click)="limpiar()"></button>
       </div>
       <div class="modal-body d-flex justify-content-center align-content-center h-50">
         <div class="container mt-5 ">
@@ -44,23 +44,24 @@
               <label class="form-label">Importe De Apertura</label>
               <div class="input-group">
                 <a class="btn btn-lg btn-dark"><i class="fas fa-dollar-sign btn-lg"></i></a>
-                <input id="importeInicio" type="number" class="form-control " placeholder="Importe De Apertura" name="apertura"
-                  [(ngModel)]="importe" (keydown.enter)="inicio()" (click)="clean()">
+                <input id="importeInicio" type="number" class="form-control " placeholder="Importe De Apertura"
+                  name="apertura" [(ngModel)]="importe" (keydown.enter)="inicio()" (click)="clean()">
               </div>
             </div>
             <div class="col-md-12 mt-5">
               <label class="form-label">Nombre Del Cajero</label>
               <div class="input-group">
                 <a class="btn btn-lg btn-dark"><i class="far fa-user btn-lg"></i></a>
-                <input type="text" class="form-control" placeholder="Nombre Cajero" name="cajero" disabled [value]="cajero">
+                <input type="text" class="form-control" placeholder="Nombre Cajero" name="cajero" disabled
+                  [value]="cajero">
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-lg btn-danger btn-lg" data-bs-dismiss="modal"
-          [routerLink]="['/inicio']" (click)="limpiar()">Cancelar</button>
+        <button type="button" class="btn btn-lg btn-danger btn-lg" data-bs-dismiss="modal" [routerLink]="['/inicio']"
+          (click)="limpiar()">Cancelar</button>
         <button id="importBTN" type="button" class="btn btn-lg btn-dark btn-lg" data-bs-dismiss="modal"
           [disabled]="importe <= 0" (click)="inicio()">Aceptar</button>
       </div>

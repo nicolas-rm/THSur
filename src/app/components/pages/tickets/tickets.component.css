@@ -12,3 +12,10 @@ label {
   margin: inherit;
   text-align: end;
 }
+thead, tbody { display: block; width: 100%;}
+
+tbody {
+    height: 65vh;       /* Just for the demo          */
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: hidden;  /* Hide the horizontal scroll */
+}

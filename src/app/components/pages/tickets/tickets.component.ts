@@ -15,6 +15,7 @@ export class TicketsComponent implements OnInit {
   fecha: string = '';
   exist: boolean = false;
   folio: string = '';
+  devolucion: number = 0;
   especial: boolean = false;
   constructor(private _FireStore: FirebaseService, private _ticket: TicketService) { }
 
@@ -59,16 +60,25 @@ export class TicketsComponent implements OnInit {
     });
   }
 
-  delete(folio: string, especial: boolean) {
+  delete(folio: string, especial: boolean, devolucion: number) {
     this.folio = folio;
     this.especial = especial;
+    this.devolucion = devolucion;
   }
 
   confirmarDelete() {
     console.log(this.folio);
     console.log(this.especial);
-    this._FireStore.deleteCollection(this.folio, this.especial);
-    this.ngOnInit();
+    if (localStorage.getItem('return')) {
+      let resta = Number(localStorage.getItem('return'));
+      resta += this.devolucion;
+      localStorage.setItem('return', String(resta));
+    } else {
+      localStorage.setItem('return', String(this.devolucion));
+    }
+    this._FireStore.deleteCollection(this.folio, this.especial).then(() => {
+      this.ngOnInit();
+    });
   }
 
   load(ticket: Departamentos) {

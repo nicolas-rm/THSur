@@ -14,7 +14,7 @@ export class EstadisticasService {
   monthlyReportDatos: Array<number> = [];
   weeklyReportDatos: Array<number> = [];
   dailyReportDatos: Array<number> = [];
-
+  entrysDatos: number = 0;
   exist: boolean = false;
   private documents!: AngularFirestoreCollection<Departamentos>;
   // departamentos = { totaltornilleria: 0, totalservicios: 0, totalrefacciones: 0, totalferreteria: 0 };
@@ -22,6 +22,13 @@ export class EstadisticasService {
 
   }
 
+  entrys(collection: string) {
+    this.documents = this.FireStore.collection<Departamentos>(collection);
+    return this.documents.valueChanges().pipe(map((resp) => {
+      this.assignation(resp, 'entradas')
+      return this.entrysDatos;
+    }));
+  }
 
   dailyReport(collection: string) {
     this.documents = this.FireStore.collection<Departamentos>(collection);
@@ -46,7 +53,7 @@ export class EstadisticasService {
       if (!this.dailyReportDatos[3]) {
         this.dailyReportDatos[3] = 0;
       }
-      console.log(this.dailyReportDatos);
+      // console.log(this.dailyReportDatos);
       return this.dailyReportDatos;
     }));
   }
@@ -54,7 +61,7 @@ export class EstadisticasService {
   weeklyReport(collection: string) {
     this.documents = this.FireStore.collection<Departamentos>(collection);
     return this.documents.valueChanges().pipe(map((resp) => {
-      this.assignation(resp), 'semanal';
+      this.assignation(resp, 'semanal');
       if (this.weeklyReportDatos.length < 0 || this.weeklyReportDatos.length == null || this.weeklyReportDatos == [] || this.weeklyReportDatos.length == 0) {
         this.weeklyReportDatos[0] = 0;
         this.weeklyReportDatos[1] = 0;
@@ -76,16 +83,16 @@ export class EstadisticasService {
         this.monthlyReportDatos[3] = 0;
       }
 
-      if(!this.monthlyReportDatos[0]){
+      if (!this.monthlyReportDatos[0]) {
         this.monthlyReportDatos[0] = 0;
       }
-      if(!this.monthlyReportDatos[1]){
+      if (!this.monthlyReportDatos[1]) {
         this.monthlyReportDatos[1] = 0;
       }
-      if(!this.monthlyReportDatos[2]){
+      if (!this.monthlyReportDatos[2]) {
         this.monthlyReportDatos[2] = 0;
       }
-      if(!this.monthlyReportDatos[3]){
+      if (!this.monthlyReportDatos[3]) {
         this.monthlyReportDatos[3] = 0;
       }
       return this.monthlyReportDatos;
@@ -103,28 +110,27 @@ export class EstadisticasService {
         this.generalReportDatos[3] = 0;
       }
 
-      if(!this.generalReportDatos[0]){
+      if (!this.generalReportDatos[0]) {
         this.generalReportDatos[0] = 0;
       }
-      if(!this.generalReportDatos[1]){
+      if (!this.generalReportDatos[1]) {
         this.generalReportDatos[1] = 0;
       }
-      if(!this.generalReportDatos[2]){
+      if (!this.generalReportDatos[2]) {
         this.generalReportDatos[2] = 0;
       }
-      if(!this.generalReportDatos[3]){
+      if (!this.generalReportDatos[3]) {
         this.generalReportDatos[3] = 0;
       }
       return this.generalReportDatos;
     }));
   }
 
-  assignation(resp: Departamentos[], seccion?: string) {
+  assignation(resp: Departamentos[], seccion: string) {
     if (!this.exist) {
-
       for (let index = 0; index < resp.length; index++) {
         for (let i = 0; i < resp[index].departamento.length; i++) {
-          if (resp[index].resta == 0 && i < resp[index].departamento.length) {
+          if (resp[index].resta == 0 && resp[index].modoPago == 'efectivo') {
             if (seccion == 'today') {
               const hoy = new Date().toLocaleString().split(' ')[0];
               const date = new Date(convertTimestamp(resp[index].fecha)).toLocaleString().split(' ')[0];
@@ -163,10 +169,6 @@ export class EstadisticasService {
                   }
                 }
               }
-            }
-            if (seccion == 'semanal') {
-              ////  console.log('entro a semana');
-
             }
             if (seccion == 'mensual') {
 
@@ -270,6 +272,15 @@ export class EstadisticasService {
                 }
               }
             }
+            if (seccion == 'entradas') {
+              // if (seccion == 'today') {
+              const hoy = new Date().toLocaleString().split(' ')[0];
+              const date = new Date(convertTimestamp(resp[index].fecha)).toLocaleString().split(' ')[0];
+              if (hoy == date) {
+                this.entrysDatos = this.entrysDatos + resp[index].paga;
+              }
+            }
+            // }
           }
         }
       }
@@ -284,11 +295,11 @@ export class EstadisticasService {
     const date = new Date(year, month, daysInMonth(month, year));
     return date;
   }
-  restablecer() {
-    this.dailyReportDatos = [];
-    this.weeklyReportDatos = [];
-    this.monthlyReportDatos = [];
-    this.generalReportDatos = [];
-  }
+  // restablecer() {
+  //   this.dailyReportDatos = [];
+  //   this.weeklyReportDatos = [];
+  //   this.monthlyReportDatos = [];
+  //   this.generalReportDatos = [];
+  // }
 
 }
