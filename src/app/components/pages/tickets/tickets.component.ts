@@ -67,8 +67,8 @@ export class TicketsComponent implements OnInit {
   }
 
   confirmarDelete() {
-    console.log(this.folio);
-    console.log(this.especial);
+    // console.log(this.folio);
+    // console.log(this.especial);
     if (localStorage.getItem('return')) {
       let resta = Number(localStorage.getItem('return'));
       resta += this.devolucion;
@@ -82,7 +82,7 @@ export class TicketsComponent implements OnInit {
   }
 
   load(ticket: Departamentos) {
-    // console.log(ticket);
+    //(ticket);
     this._ticket.valores.Totalabonado = ticket.totalAbonado;
     this._ticket.valores.abonado = ticket.abonos;
     this._ticket.valores.cambio = ticket.cambio;
@@ -96,7 +96,7 @@ export class TicketsComponent implements OnInit {
     this._ticket.valores.resta = ticket.resta;
     // this._ticket.valores.titulo = ticket.titulo;
     this._ticket.valores.total = ticket.total;
-    console.log(this._ticket.valores);
+    // console.log(this._ticket.valores);
     // this._ticket.valores.validate = ticket.validate;
     // this._ticket.departamentos = this.departamentos;
 
@@ -115,7 +115,7 @@ export class TicketsComponent implements OnInit {
         this.servicios(ticket.totales[i]);
       }
     }
-    // console.log(ticket.fecha);
+    //(ticket.fecha);
     // this._ticket.valores.fecha = ticket.fecha;
     this._ticket.reimprimir = true;
   }

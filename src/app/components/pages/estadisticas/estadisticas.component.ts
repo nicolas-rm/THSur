@@ -66,10 +66,10 @@ export class EstadisticasComponent implements OnInit {
   detec() {
     this.restablecer();
     this.estadisticas.dailyReport('THSureste-Abonos').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
     });
     this.estadisticas.dailyReport('THSureste-Contado').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
       this.dailyReport[0] = resp[0];
       this.dailyReport[1] = resp[1];
       this.dailyReport[2] = resp[2];
@@ -77,10 +77,10 @@ export class EstadisticasComponent implements OnInit {
       // this.estadisticas.exist = true;
     });
     this.estadisticas.weeklyReport('THSureste-Abonos').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
     });
     this.estadisticas.weeklyReport('THSureste-Contado').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
       this.weeklyReport[0] = resp[0];
       this.weeklyReport[1] = resp[1];
       this.weeklyReport[2] = resp[2];
@@ -88,10 +88,10 @@ export class EstadisticasComponent implements OnInit {
       // this.estadisticas.exist = true;
     });
     this.estadisticas.monthlyReport('THSureste-Abonos').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
     });
     this.estadisticas.monthlyReport('THSureste-Contado').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
       this.monthlyReport[0] = resp[0];
       this.monthlyReport[1] = resp[1];
       this.monthlyReport[2] = resp[2];
@@ -99,10 +99,10 @@ export class EstadisticasComponent implements OnInit {
       // this.estadisticas.exist = true;
     });
     this.estadisticas.generalReport('THSureste-Abonos').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
     });
     this.estadisticas.generalReport('THSureste-Contado').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
       this.generalReport[0] = resp[0];
       this.generalReport[1] = resp[1];
       this.generalReport[2] = resp[2];

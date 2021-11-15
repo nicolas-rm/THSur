@@ -51,34 +51,34 @@ export class SidebarMenuComponent implements OnInit {
   detec() {
     this.restablecer();
     this.estadisticas.dailyReport('THSureste-Abonos').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
     });
     this.estadisticas.dailyReport('THSureste-Contado').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
       this.dailyReport = resp;
       // this.estadisticas.exist = true;
     });
     this.estadisticas.weeklyReport('THSureste-Abonos').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
     });
     this.estadisticas.weeklyReport('THSureste-Contado').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
       this.weeklyReport = resp;
       // this.estadisticas.exist = true;
     });
     this.estadisticas.monthlyReport('THSureste-Abonos').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
     });
     this.estadisticas.monthlyReport('THSureste-Contado').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
       this.monthlyReport = resp;
       // this.estadisticas.exist = true;
     });
     this.estadisticas.generalReport('THSureste-Abonos').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
     });
     this.estadisticas.generalReport('THSureste-Contado').subscribe((resp) => {
-      // console.log(resp);
+      //(resp);
       this.generalReport = resp;
       // this.estadisticas.exist = true;
     });
@@ -86,7 +86,7 @@ export class SidebarMenuComponent implements OnInit {
 
     });
     this.estadisticas.entrys('THSureste-Contado').subscribe((resp) => {
-      console.log(resp);
+      //(resp);
       this.entrada = resp;
       this.estadisticas.exist = true;
     });

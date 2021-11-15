@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     }
 
     this._FireStore.readUser(usuario.correo).subscribe((resp) => {
-      //// //  console.log(resp);
+      //// //  // console.log(resp);
       if (resp.length > 0) {
         if (this._FireStore.decrypt(usuario, resp[0]) && resp[0].estatus === true) {
           // ACTUALIZO EL USUARIO CON EL TOKEN
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         }
 
         if (resp && !this.exist) {
-         // //  console.log('USUARIO O CONTRASEÑA INCORRECTA.!');
+         // //  // console.log('USUARIO O CONTRASEÑA INCORRECTA.!');
         }
       }
     });

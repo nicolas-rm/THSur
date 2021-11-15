@@ -1,33 +1,41 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app/firebase';
 import { Router } from '@angular/router';
 import { TicketService, ModoPagoService, BoxService } from 'src/app/services/index.service';
 import { FirebaseService } from '../../../services/firebase.service';
 import { Departamentos } from '../../interface/departamentos';
-import { ModalComponent } from '../modal/modal.component';
+
 @Component({
   selector: 'app-ticket',
   templateUrl: './ticket.component.html',
   styleUrls: ['./ticket.component.css']
 })
-export class TicketComponent implements OnInit {
+export class TicketComponent implements OnInit, OnDestroy {
   // @HostListener('window:afterprint')
   cajero: string = ''
   @Input() bankName: string = '';
-  date: any = Date.now();
-  exist = true;
+  date: any = new Date();
+  exist = false;
+  condicion = true;
   abonosArray: Array<any> = [];
   constructor(public _ticket: TicketService, private _modopago: ModoPagoService, private _box: BoxService, private _FireStore: FirebaseService, private router: Router) {
     for (let key in this._ticket.valores.abonado) {
       this.abonosArray.push({ abono: this._ticket.valores.abonado[key] });
     }
+    this.condicion = true;
 
+  }
+  ngOnDestroy(): void {
+    this.condicion = true;
+
+    // console.log('ngOnDestroy');
   }
 
   ngOnInit(): void {
+    this.condicion = true;
 
     this.cajero = String(localStorage.getItem('name'));
-    console.log(this._ticket.valores.fecha);
+    //(this._ticket.valores.fecha);
     if (this._ticket.valores.fecha) {
       this.date = this._ticket.valores.fecha;
     }
@@ -36,7 +44,7 @@ export class TicketComponent implements OnInit {
   prinit() {
     const finish = this.saveCollection();
     const onbeforeprint = () => {
-      //  //// //  console.log('Impresion en proceso!.');
+      //  //// //  // console.log('Impresion en proceso!.');
       finish;
       return true;
     };
@@ -69,6 +77,7 @@ export class TicketComponent implements OnInit {
       resta: 'd-none',
       cambio: 'd-none',
     };
+    this.exist = false;
     this._FireStore.update.folio = ''
     this._ticket.reimprimir = false;
     this._FireStore.update.exist = false;
@@ -96,28 +105,11 @@ export class TicketComponent implements OnInit {
       totalAbonado: this._ticket.valores.Totalabonado
     };
 
+    this.readCollection(collection);
 
-    if (collection.folio == this._FireStore.update.folio) {
-      this.readCollection();
-      if (this.exist) {
-        this.updateCollection(collection);
-      } else {
-        this.createCollection(collection);
-      }
-    }
-    if (collection.folio != this._FireStore.update.folio) {
-      this.readCollection();
-      if (this.exist) {
-        this.createCollection(collection);
-      }
-      if (!this.exist) {
-        this.restablecer();
-        document.getElementById('ticketClose')?.click();
-        this._FireStore.timerError('Folio Existente No Se Generara Ticket');
-        return;
-      }
-    }
     this.restablecer();
+    document.getElementById('ticketClose')?.click();
+
   }
 
   departamentos() {
@@ -182,14 +174,58 @@ export class TicketComponent implements OnInit {
     });
   }
 
-  readCollection() {
+  readCollection(collection: Departamentos) {
+    this.condicion = true;
+
     this._FireStore.readCollection(this._ticket.valores.especial, this._ticket.valores.folio).subscribe((documento: Departamentos[]) => {
-      if (documento.length > 0) {
+      if (documento.length > 0 && !this.exist && this.condicion) {
+
+        if (collection.especial) {
+          if (collection.folio == this._FireStore.update.folio && this.condicion) {
+            this.updateCollection(collection);
+            this.condicion = false;
+            return;
+          }
+          if (collection.folio != this._FireStore.update.folio && this.condicion) {
+            this.condicion = false;
+
+            document.getElementById('ticketClose')?.click();
+            this.restablecer();
+            this._FireStore.timerError('Folio Ya Existe.!');
+            return;
+          }
+        }
+
+        if (collection.folio == documento[0].folio && this.condicion) {
+          this.condicion = false;
+
+          document.getElementById('ticketClose')?.click();
+          this.restablecer();
+          this._FireStore.timerError('Folio Ya Existe.!');
+          return;
+        }
+      }
+
+
+      if (documento.length == 0 && !this.exist && this.condicion) {
+        if (collection.especial && this.condicion) {
+          this.condicion = false;
+          this.createCollection(collection);
+          return;
+        }
+
+        if (!collection.especial && this.condicion) {
+          this.condicion = false;
+          this.createCollection(collection);
+          return;
+          // this._FireStore.('Folio Ya Existe.!');
+        }
         this.exist = true;
-      } else {
-        this.exist = false;
+        this.condicion = false;
       }
     });
+
+    //(this.exist);
   }
 
   reimprimir() {
