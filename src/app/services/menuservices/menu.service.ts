@@ -16,7 +16,7 @@ export class MenuService {
       url: '/tickets'
     },
     {
-      titulo: 'Estadisticas',
+      titulo: 'Graficas',
       icono: 'fas fa-chart-pie',
       url: '/estadisticas'
     },

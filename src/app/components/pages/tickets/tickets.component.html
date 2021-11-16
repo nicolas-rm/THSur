@@ -20,6 +20,7 @@
       <input [(ngModel)]="folioSearch" type="text" class="form-control btn-lg" name="busqueda"
         placeholder="Ticket a Buscar" (keydown.enter)="search(folioSearch)" (change)="search(folioSearch)">
       <a class="btn btn-success" (click)="search(folioSearch)"><i class="fas fa-search btn-lg"></i></a>
+      <a class="btn btn-primary" (click)="readCollection()"><i class="fas fa-sync-alt btn-lg"></i></a>
     </div>
     <table class="table table-borderless table-responsive">
       <thead>
@@ -52,7 +53,7 @@
           <td class="mt-5"> {{ item.fecha | date: 'dd/MM/yy' }} </td>
           <td> <a class="btn btn-outline-dark" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
               (click)="load(item)"><i class="fas fa-print"></i></a></td>
-          <td> <a (click)="this.delete(item.folio, item.especial, item.paga)" class="btn btn-outline-primary"
+          <td> <a disabled (click)="this.delete(item.folio, item.especial, item.paga)" class="btn btn-outline-primary"
               data-bs-target="#staticBackdrop" data-bs-toggle="modal"><i class="fas fa-trash"></i></a>
           </td>
         </tr>

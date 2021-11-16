@@ -3,7 +3,7 @@
     <img src="../../assets/svg/login.svg" class="w-100">
   </div>
   <div class="col p-0 bg-custom d-flex justify-content-center align-items-center flex-column w-100">
-    <form class="w-75" ngNativeValidate [formGroup]="Formulario" (ngSubmit)="iniciarSesion($event)">
+    <form autocomplete="off" id="loginForm" #loginForm="ngForm" class="w-75" ngNativeValidate [formGroup]="Formulario" (ngSubmit)="iniciarSesion($event)" name="loginForm">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Usuario</label>
         <input formControlName="usuario" name="usuario" required type="text" class="form-control btn-lg"
@@ -27,12 +27,12 @@
 
       <div class="row">
         <div class="col">
-          <button type="button" class="btn btn-lg btn-custom  btn-block mt-3" (click)="iniciarSesion($event)">Iniciar
+          <button type="submit" class="btn btn-lg btn-custom  btn-block mt-3" (click)="iniciarSesion($event)">Iniciar
             sesion</button>
         </div>
         <div class="col">
-          <button class="btn btn-lg btn-custom btn-block mt-3 text-white"
-            [routerLink]="['/registro']">Registrarse</button>
+          <button type="button" class="btn btn-lg btn-custom btn-block mt-3 text-white"
+            routerLink="/registro">Registrarse</button>
         </div>
       </div>
     </form>

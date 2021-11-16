@@ -37,10 +37,10 @@ export class FirebaseService {
     this.selectCollection(especial);
     return this.FireStore.collection(this.collection).doc(document.folio).set(document).then((e) => {
       this.timerSuccess('Ticket Creado Correctamente.!');
-      //// //  // console.log(e);
+      //// //  // // console.log(e);
     }).catch((error: FirebaseError) => {
       this.timerError('Ticket No Creado Correctamente.!');
-      //// //  // console.log(error);
+      //// //  // // console.log(error);
     });
   }
 
@@ -55,13 +55,37 @@ export class FirebaseService {
         const doc = document.payload.doc.data();
         doc.fecha = convertTimestamp(document.payload.doc.data().fecha);
         documents.push(doc);
-
       });
-      // if (documents) {
-      // this.timerSuccess(`Tickets Cargados Correctamente, ${documents.length} .!`);
-      // } else {
-      // this.timerError('No existe Ningun Ticket.!');
-      // }
+      return documents;
+    }));
+  }
+
+  abonos() {
+    // this.selectCollection();
+    this.collection = 'THSureste-Abonos'
+    this.documents = this.FireStore.collection<Departamentos>(this.collection);
+    return this.documents.snapshotChanges().pipe(map((resp) => {
+      const documents: Array<Departamentos> = [];
+      resp.forEach((document) => {
+        const doc = document.payload.doc.data();
+        doc.fecha = convertTimestamp(document.payload.doc.data().fecha);
+        documents.push(doc);
+      });
+      return documents;
+    }));
+  }
+
+  contado() {
+    // this.selectCollection();
+    this.collection = 'THSureste-Contado'
+    this.documents = this.FireStore.collection<Departamentos>(this.collection);
+    return this.documents.snapshotChanges().pipe(map((resp) => {
+      const documents: Array<Departamentos> = [];
+      resp.forEach((document) => {
+        const doc = document.payload.doc.data();
+        doc.fecha = convertTimestamp(document.payload.doc.data().fecha);
+        documents.push(doc);
+      });
       return documents;
     }));
   }
@@ -90,7 +114,7 @@ export class FirebaseService {
     return this.FireStore.collection(this.collection).doc(document.folio).set(document);
   }
 
-  deleteCollection(documentId: string, especial: boolean){
+  deleteCollection(documentId: string, especial: boolean) {
     this.selectCollection(especial);
     return this.FireStore.collection(this.collection).doc(documentId).delete();
   }
@@ -107,7 +131,7 @@ export class FirebaseService {
   encrypt(document: Registro) {
     // document.correo = hashSync(document.correo, 10);
     document.contrasena = hashSync(document.contrasena, 10);
-   // //  // console.log(document);
+    // //  // // console.log(document);
     return document;
   }
 
@@ -115,17 +139,17 @@ export class FirebaseService {
     let equals = false;
     if (compareSync(document.contrasena, user.contrasena)) {
       equals = true;
-      //// //  // console.log(equals);
+      //// //  // // console.log(equals);
 
     }
 
     if (!compareSync(document.contrasena, user.contrasena)) {
       equals = false;
-      //// //  // console.log(equals);
+      //// //  // // console.log(equals);
 
     }
 
-    //// //  // console.log(equals);
+    //// //  // // console.log(equals);
     return equals;
   }
 
@@ -133,10 +157,10 @@ export class FirebaseService {
   createUser(document: Registro) {
     this.collection = 'THSureste-usuarios';
     return this.FireStore.collection<Registro>(this.collection).doc(document.correo).set(document).then(() => {
-      //// //  // console.log('Usuario Creado Correctamente.!');
+      //// //  // // console.log('Usuario Creado Correctamente.!');
     }).catch((error: FirebaseError) => {
-      //// //  // console.log(error);
-      //// //  // console.log('Usuario No Creado Correctamente.!');
+      //// //  // // console.log(error);
+      //// //  // // console.log('Usuario No Creado Correctamente.!');
     });
   }
 
@@ -144,12 +168,12 @@ export class FirebaseService {
     this.collection = 'THSureste-usuarios';
     this.user = this.FireStore.collection<Registro>(this.collection);
     return this.user.doc(folio).snapshotChanges().pipe(map((resp) => {
-      //// //  // console.log(resp);
+      //// //  // // console.log(resp);
       const document: Array<Registro> = [];
       if (resp.payload.exists) {
         document.push(resp.payload.data());
       }
-      //// //  // console.log(document);
+      //// //  // // console.log(document);
       return document;
     }));;
   }

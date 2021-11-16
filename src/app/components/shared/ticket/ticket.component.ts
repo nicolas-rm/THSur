@@ -28,7 +28,7 @@ export class TicketComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.condicion = true;
 
-    // console.log('ngOnDestroy');
+    // // console.log('ngOnDestroy');
   }
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class TicketComponent implements OnInit, OnDestroy {
   prinit() {
     const finish = this.saveCollection();
     const onbeforeprint = () => {
-      //  //// //  // console.log('Impresion en proceso!.');
+      //  //// //  // // console.log('Impresion en proceso!.');
       finish;
       return true;
     };
@@ -106,9 +106,9 @@ export class TicketComponent implements OnInit, OnDestroy {
     };
 
     this.readCollection(collection);
-
-    this.restablecer();
-    document.getElementById('ticketClose')?.click();
+    // console.log(this._ticket.valores.especial);
+    // this.restablecer();
+    // document.getElementById('ticketClose')?.click();
 
   }
 
@@ -190,8 +190,8 @@ export class TicketComponent implements OnInit, OnDestroy {
             this.condicion = false;
 
             document.getElementById('ticketClose')?.click();
-            this.restablecer();
             this._FireStore.timerError('Folio Ya Existe.!');
+            this.restablecer();
             return;
           }
         }
@@ -200,8 +200,8 @@ export class TicketComponent implements OnInit, OnDestroy {
           this.condicion = false;
 
           document.getElementById('ticketClose')?.click();
-          this.restablecer();
           this._FireStore.timerError('Folio Ya Existe.!');
+          this.restablecer();
           return;
         }
       }

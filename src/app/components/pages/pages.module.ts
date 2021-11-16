@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BoxComponent } from './box/box.component';
 import { ModalComponent } from '../shared/modal/modal.component';
 import { BoxservicesComponent } from './box/boxservices/boxservices.component';

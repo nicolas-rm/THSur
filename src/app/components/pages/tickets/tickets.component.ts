@@ -20,19 +20,7 @@ export class TicketsComponent implements OnInit {
   constructor(private _FireStore: FirebaseService, private _ticket: TicketService) { }
 
   ngOnInit(): void {
-    // if (!this.exist) {
-    this._FireStore.readCollections(true).subscribe((collectiones: Departamentos[]) => {
-      if (collectiones.length > 0) {
-        this.collectionesAbono = collectiones;
-      }
-      // this.search('');
-    });
-    this._FireStore.readCollections(false).subscribe((collectiones: Departamentos[]) => {
-      if (collectiones.length > 0) {
-        this.collectionesContado = collectiones;
-      }
-      // this.search('');
-    });
+    this.readCollection();
 
   }
 
@@ -49,14 +37,18 @@ export class TicketsComponent implements OnInit {
     this.collectionesAbono = [];
     this.collectionesContado = [];
     this._FireStore.readCollection(true, folio).subscribe((collectiones) => {
-      if (collectiones.length > 0) {
-        this.collectionesAbono = collectiones;
-      }
+      this.collectionesAbono = [];
+      this.folio = '';
+      this.especial = true;
+      this.devolucion = 0;
+      this.collectionesAbono = collectiones;
     });
     this._FireStore.readCollection(false, folio).subscribe((collectiones) => {
-      if (collectiones.length > 0) {
-        this.collectionesContado = collectiones;
-      }
+      this.collectionesContado = [];
+      this.folio = '';
+      this.especial = false;
+      this.devolucion = 0;
+      this.collectionesContado = collectiones;
     });
   }
 
@@ -67,22 +59,11 @@ export class TicketsComponent implements OnInit {
   }
 
   confirmarDelete() {
-    // console.log(this.folio);
-    // console.log(this.especial);
-    if (localStorage.getItem('return')) {
-      let resta = Number(localStorage.getItem('return'));
-      resta += this.devolucion;
-      localStorage.setItem('return', String(resta));
-    } else {
-      localStorage.setItem('return', String(this.devolucion));
-    }
-    this._FireStore.deleteCollection(this.folio, this.especial).then(() => {
-      this.ngOnInit();
-    });
+    this._FireStore.deleteCollection(this.folio, this.especial);
   }
 
   load(ticket: Departamentos) {
-    //(ticket);
+    // // console.log(ticket);
     this._ticket.valores.Totalabonado = ticket.totalAbonado;
     this._ticket.valores.abonado = ticket.abonos;
     this._ticket.valores.cambio = ticket.cambio;
@@ -96,7 +77,7 @@ export class TicketsComponent implements OnInit {
     this._ticket.valores.resta = ticket.resta;
     // this._ticket.valores.titulo = ticket.titulo;
     this._ticket.valores.total = ticket.total;
-    // console.log(this._ticket.valores);
+    // // console.log(this._ticket.valores);
     // this._ticket.valores.validate = ticket.validate;
     // this._ticket.departamentos = this.departamentos;
 
@@ -115,7 +96,7 @@ export class TicketsComponent implements OnInit {
         this.servicios(ticket.totales[i]);
       }
     }
-    //(ticket.fecha);
+    // // console.log(ticket.fecha);
     // this._ticket.valores.fecha = ticket.fecha;
     this._ticket.reimprimir = true;
   }
@@ -134,4 +115,37 @@ export class TicketsComponent implements OnInit {
   servicios(value: any): void {
     this._ticket.servicios(value);
   }
+
+  readCollection() {
+
+    this._FireStore.abonos().subscribe((collectiones: Departamentos[]) => {
+      this.collectionesAbono = [];
+      collectiones.forEach(element => {
+        if (element.especial == true) {
+          this.collectionesAbono.push(element);
+        }
+        if (element.especial == false) {
+          const doc = element;
+          this._FireStore.createCollection(doc, false);
+          this._FireStore.deleteCollection(doc.folio, true);
+        }
+      });
+      // }
+      // this.search('');
+    });
+    this._FireStore.contado().subscribe((collectiones: Departamentos[]) => {
+      this.collectionesContado = [];
+      collectiones.forEach(element => {
+        if (element.especial == false) {
+          this.collectionesContado.push(element);
+        }
+        if (element.especial == true) {
+          const doc = element;
+          this._FireStore.createCollection(doc, true);
+          this._FireStore.deleteCollection(doc.folio, false);
+        }
+      });
+    });
+  }
 }
+
