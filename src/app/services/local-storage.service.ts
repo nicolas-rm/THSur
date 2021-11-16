@@ -33,6 +33,7 @@ export class LocalStorageService {
     localStorage.removeItem('date');
     localStorage.removeItem('import');
     localStorage.removeItem('name');
+    localStorage.removeItem('return');
     this.router.navigate(['/inicio']);
   }
 

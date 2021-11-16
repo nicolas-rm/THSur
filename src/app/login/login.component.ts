@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
     if (localStorage.getItem('uid') && localStorage.getItem('email') && localStorage.getItem('date') && localStorage.getItem('import') && localStorage.getItem('name')) {
       this._router.navigate(['/principal']);
-    }else {
+    } else {
       this._localstorage.logOut();
     }
     this.Formulario = new FormGroup({
@@ -33,7 +33,12 @@ export class LoginComponent implements OnInit {
 
   }
 
+  notSpace(id: string) {
+    var input: any = document.getElementById(id);
+    input.value = input.value.trim();
+  }
   iniciarSesion(event: any) {
+    this.notSpace('exampleFormControlInput1');
     if (this.Formulario.invalid) {
       return;
     }
@@ -59,7 +64,7 @@ export class LoginComponent implements OnInit {
         }
 
         if (resp && !this.exist) {
-         // //  // // console.log('USUARIO O CONTRASEÑA INCORRECTA.!');
+          // //  // // console.log('USUARIO O CONTRASEÑA INCORRECTA.!');
         }
       }
     });

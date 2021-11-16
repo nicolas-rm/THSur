@@ -14,6 +14,7 @@ import { TicketComponent } from '../shared/ticket/ticket.component';
 import { NotificacionesComponent } from '../shared/notificaciones/notificaciones.component';
 import { LoginGuard } from '../guard/login.guard';
 import { TicketsComponent } from './tickets/tickets.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 /* ===================================================== */
 /* ==================>> COMPONENTES <<================== */
@@ -52,7 +53,13 @@ const routes: Routes = [
       },
       {
         path: 'estadisticas',
-        component: EstadisticasComponent
+        component: EstadisticasComponent,
+        canActivate: [LoginGuard],
+      },
+      {
+        path: 'usuarios',
+        component: UsuariosComponent,
+        canActivate: [LoginGuard],
       },
       // /* REDIRECCION */
       { path: '', redirectTo: '/principal', pathMatch: 'full' },

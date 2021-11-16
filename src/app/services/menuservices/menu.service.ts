@@ -20,6 +20,11 @@ export class MenuService {
       icono: 'fas fa-chart-pie',
       url: '/estadisticas'
     },
+    {
+      titulo: 'Usuarios',
+      icono: 'fas fa-user-alt',
+      url: '/usuarios'
+    },
   ];
 
   importe: number = 0;

@@ -24,19 +24,16 @@ export class RegisterComponent implements OnInit {
       contrasena2: new FormControl(null, Validators.required),
       // condiciones: new FormControl(false, Validators.required)
     }, { validators: this.checkPasswords });
-    this.Formulario.setValue({
-      nombre: '',
-      apellidos: '',
-      correo: '',
-      contrasena: '',
-      contrasena2: '',
-      // condiciones: true
-    });
     this.exist = false;
   }
 
   ngOnInit(): void {
 
+  }
+
+  notSpace(id: string) {
+    var input: any = document.getElementById(id);
+    input.value = input.value.trim();
   }
 
   showpass() {
@@ -52,16 +49,21 @@ export class RegisterComponent implements OnInit {
   }
 
   registrarUsuario(event: any) {
-    //// //  // // console.log(event);
+    this.notSpace('nombre');
+    this.notSpace('apellidos');
     if (this.Formulario.invalid) {
       alert('ALGO SALIO MAL: DATOS INCORRECTOS');
       return;
     }
 
+    const nombre: string = this.Formulario.value.nombre;
+    const apellidos: string = this.Formulario.value.apellidos;
+    const correo: string = this.Formulario.value.correo;
+
     let usuario: Registro = {
-      nombre: this.Formulario.value.nombre,
-      apellidos: this.Formulario.value.apellidos,
-      correo: this.Formulario.value.correo,
+      nombre: nombre.toLowerCase(),
+      apellidos: apellidos.toLowerCase(),
+      correo: correo.toLowerCase(),
       contrasena: this.Formulario.value.contrasena,
       estatus: false
     }

@@ -24,7 +24,7 @@
       </div>
       <div class="mb-3">
         <label for="correo" class="form-label">Correo</label>
-        <input formControlName="correo" name="correo" required type="text" class="form-control btn-lg" id="correo"
+        <input (keyup)="notSpace('correo')" formControlName="correo" name="correo" required type="text" class="form-control btn-lg" id="correo"
           placeholder="Correo" required>
       </div>
 

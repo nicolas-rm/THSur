@@ -15,6 +15,7 @@ import { PAGES_ROUTES } from './pages.routes';
 import { TicketsComponent } from './tickets/tickets.component';
 
 import { ChartsModule } from 'ng2-charts';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 
 
@@ -30,7 +31,8 @@ import { ChartsModule } from 'ng2-charts';
     ServiciosComponent,
     NotificacionesComponent,
     TicketsComponent,
-    SidebarMenuComponent
+    SidebarMenuComponent,
+    UsuariosComponent
   ],
   imports: [
     CommonModule,
