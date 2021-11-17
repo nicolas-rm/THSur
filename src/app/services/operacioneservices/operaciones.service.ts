@@ -10,7 +10,7 @@ export class OperacionesService {
 
   operaciones(valores: TicketInterface) {
     if (valores.especial) {
-     // //  // // console.log('entrando en especial');
+      // //  // // console.log('entrando en especial');
 
       if (valores.total == valores.Totalabonado) {
         valores.resta = valores.total - valores.Totalabonado;
@@ -62,7 +62,7 @@ export class OperacionesService {
 
 
     if (!valores.especial) {
-     // //  // // console.log('entrando en normal');
+      // //  // // console.log('entrando en normal');
       if (valores.total == 0 || valores.total == null) {
         valores.Totalabonado = 0;
         valores.cambio = 0;
@@ -84,7 +84,7 @@ export class OperacionesService {
         valores.Totalabonado = valores.total;
         valores.paga = valores.total;
       }
-      if(valores.pago < valores.total){
+      if (valores.pago < valores.total) {
         valores.resta = valores.total - valores.pago;
         valores.cambio = 0;
         valores.Totalabonado = valores.pago;
@@ -111,12 +111,12 @@ export class OperacionesService {
     }
     if (!valores.especial) {
       if (valores.modoPago == 'efectivo') {
-        if (String(valores.folio).length > 3 && valores.total > 0 && valores.pago >= valores.total && valores.folio != null && valores.folio != '' && valores.folio != '\n' && valores.folio != '\s' && valores.folio != '\t' ) {
+        if (valores.total > 0 && valores.pago >= valores.total) {
           valores.validate = true;
         } else {
           valores.validate = false;
         }
-      } else if (String(valores.folio).length > 3 && valores.total > 0 && valores.folio != null && valores.folio != '' && valores.folio != '\n' && valores.folio != '\s' && valores.folio != '\t' && valores.modoPago != '') {
+      } else if (valores.total > 0 && valores.modoPago != '') {
         valores.validate = true;
       } else {
         valores.validate = false;

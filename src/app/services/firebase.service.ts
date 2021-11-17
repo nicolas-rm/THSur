@@ -33,15 +33,16 @@ export class FirebaseService {
 
   /* CREA UN NUEVO DOCUMENTO DE DATOS - NUEVO REGISTRO */
   createCollection(document: Departamentos, especial: boolean) {
-
+    var query: any;
     this.selectCollection(especial);
-    return this.FireStore.collection(this.collection).doc(document.folio).set(document).then((e) => {
-      this.timerSuccess('Ticket Creado Correctamente.!');
-      //// //  // // console.log(e);
-    }).catch((error: FirebaseError) => {
-      this.timerError('Ticket No Creado Correctamente.!');
-      //// //  // // console.log(error);
-    });
+    if (especial) {
+      query = this.FireStore.collection(this.collection).doc(document.folio).set(document);
+    }
+
+    if (!especial) {
+      query = this.FireStore.collection(this.collection).add(document);
+    }
+    return query;
   }
 
   /* LEER DOCUMENTOS DE DATOS - OBTENER REGISTROS */
@@ -84,6 +85,7 @@ export class FirebaseService {
       resp.forEach((document) => {
         const doc = document.payload.doc.data();
         doc.fecha = convertTimestamp(document.payload.doc.data().fecha);
+        doc.folio = document.payload.doc.id;
         documents.push(doc);
       });
       return documents;

@@ -48,13 +48,13 @@
           <hr>
           <!-- <hr> -->
           <div class="offset-2">
-            <div class="mb-0 col-9">
+            <div class="mb-0 col-9" *ngIf="this._ticket.valores.especial" >
               <label class="form-label">Num. Folio</label>
               <div class="input-group">
                 <input autocomplete="off" required type="text" min="0" class="form-control btn-lg btn-lg" name="folio"
                   placeholder="Num. Folio" [(ngModel)]="this._ticket.valores.folio" (keyup)="operaciones()">
                   <!-- <a *ngIf="this._ticket.valores.especial" class="btn btn-danger btn-lg"><i class="fas fa-tools"></i></a> -->
-                  <a *ngIf="this._ticket.valores.especial" class="btn btn-success btn-lg" (click)="readCollection()" ><i class="fas fa-search"></i></a>
+                  <a class="btn btn-success btn-lg" (click)="readCollection()" ><i class="fas fa-search"></i></a>
               </div>
             </div>
             <div class="row mb-0">

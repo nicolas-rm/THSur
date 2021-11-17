@@ -98,7 +98,7 @@ export class TicketComponent implements OnInit, OnDestroy {
       abonos: this._ticket.valores.abonado,
       resta: this._ticket.valores.resta,
       fecha: new Date(),
-      folio: this._ticket.valores.folio,
+      folio: (this._ticket.valores.folio.length > 3) ? this._ticket.valores.folio : 'null',
       pago: this._ticket.valores.pago,
       paga: this._ticket.valores.paga,
       cambio: this._ticket.valores.cambio,
@@ -176,55 +176,59 @@ export class TicketComponent implements OnInit, OnDestroy {
 
   readCollection(collection: Departamentos) {
     this.condicion = true;
+    if (collection.especial) {
+      this._FireStore.readCollection(this._ticket.valores.especial, this._ticket.valores.folio).subscribe((documento: Departamentos[]) => {
+        if (documento.length > 0 && !this.exist && this.condicion) {
 
-    this._FireStore.readCollection(this._ticket.valores.especial, this._ticket.valores.folio).subscribe((documento: Departamentos[]) => {
-      if (documento.length > 0 && !this.exist && this.condicion) {
+          if (collection.especial) {
+            if (collection.folio == this._FireStore.update.folio && this.condicion) {
+              this.updateCollection(collection);
+              this.condicion = false;
+              return;
+            }
+            if (collection.especial && collection.folio != this._FireStore.update.folio && this.condicion) {
+              this.condicion = false;
 
-        if (collection.especial) {
-          if (collection.folio == this._FireStore.update.folio && this.condicion) {
-            this.updateCollection(collection);
+              document.getElementById('ticketClose')?.click();
+              this._FireStore.timerError('Folio Ya Existe.!');
+              this.restablecer();
+              return;
+            }
+          }
+
+          // if (collection.especial && collection.folio == documento[0].folio && this.condicion) {
+          //   this.condicion = false;
+          //   document.getElementById('ticketClose')?.click();
+          //   this._FireStore.timerError('Folio Ya Existe.!');
+          //   this.restablecer();
+          //   return;
+          // }
+        }
+
+
+        if (documento.length == 0 && !this.exist && this.condicion) {
+          if (collection.especial && this.condicion) {
             this.condicion = false;
+            this.createCollection(collection);
             return;
           }
-          if (collection.folio != this._FireStore.update.folio && this.condicion) {
+
+          if (!collection.especial && this.condicion) {
             this.condicion = false;
-
-            document.getElementById('ticketClose')?.click();
-            this._FireStore.timerError('Folio Ya Existe.!');
-            this.restablecer();
+            this.createCollection(collection);
             return;
+            // this._FireStore.('Folio Ya Existe.!');
           }
-        }
-
-        if (collection.folio == documento[0].folio && this.condicion) {
+          this.exist = true;
           this.condicion = false;
-
-          document.getElementById('ticketClose')?.click();
-          this._FireStore.timerError('Folio Ya Existe.!');
-          this.restablecer();
-          return;
         }
-      }
+      });
 
-
-      if (documento.length == 0 && !this.exist && this.condicion) {
-        if (collection.especial && this.condicion) {
-          this.condicion = false;
-          this.createCollection(collection);
-          return;
-        }
-
-        if (!collection.especial && this.condicion) {
-          this.condicion = false;
-          this.createCollection(collection);
-          return;
-          // this._FireStore.('Folio Ya Existe.!');
-        }
-        this.exist = true;
-        this.condicion = false;
-      }
-    });
-
+      return;
+    }
+    if (!collection.especial) {
+      this.createCollection(collection);
+    }
     //(this.exist);
   }
 

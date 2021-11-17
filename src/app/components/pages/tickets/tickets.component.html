@@ -1,67 +1,47 @@
-<app-sidebar-menu bankName="Registro De Tickets"></app-sidebar-menu>
-
-<div class="container card pt-5 mt-2">
-  <!--   <div class="bd-example">
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-      <label class="form-check-label" for="inlineCheckbox1"> Tickets Hoy</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-      <label class="form-check-label" for="inlineCheckbox2"> Tickets Ayer</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-      <label class="form-check-label" for="inlineCheckbox3"> Tickets Todos </label>
-    </div>
-  </div> -->
-  <div class="bd-example mt-2">
-    <div class="input-group">
-      <input [(ngModel)]="folioSearch" type="text" class="form-control btn-lg" name="busqueda"
-        placeholder="Ticket a Buscar" (keydown.enter)="search(folioSearch)" (change)="search(folioSearch)">
-      <a class="btn btn-success" (click)="search(folioSearch)"><i class="fas fa-search btn-lg"></i></a>
-      <a class="btn btn-primary" (click)="readCollection()"><i class="fas fa-sync-alt btn-lg"></i></a>
-    </div>
-    <table class="table table-borderless table-responsive">
-      <thead>
-        <tr>
-          <th scope="col">#Folio</th>
-          <th scope="col">Tipo</th>
-          <th scope="col">Importe</th>
-          <th scope="col">Fecha</th>
-          <th scope="col">Imprimir</th>
-          <th scope="col">Devolucion</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        <tr *ngFor="let item of collectionesAbono">
-          <th scope="row" class="mt-5">{{ item.folio }}</th>
-          <td class="mt-5"> Abonos </td>
-          <td class="mt-5"> ${{ item.total }}</td>
-          <td class="mt-5"> {{ item.fecha | date: 'dd/MM/yy' }} </td>
-          <td> <a class="btn btn-outline-dark" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
-              (click)="load(item)"><i class="fas fa-print"></i></a></td>
-          <td> <a class="btn btn-outline-primary" (click)="this.delete(item.folio, item.especial, item.paga)"
-              data-bs-target="#staticBackdrop" data-bs-toggle="modal"><i class="fas fa-trash"></i></a>
-          </td>
-        </tr>
-        <tr *ngFor="let item of collectionesContado">
-          <th scope="row" class="mt-5">{{ item.folio }}</th>
-          <td class="mt-5"> Contado </td>
-          <td class="mt-5"> ${{ item.total }}</td>
-          <td class="mt-5"> {{ item.fecha | date: 'dd/MM/yy' }} </td>
-          <td> <a class="btn btn-outline-dark" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
-              (click)="load(item)"><i class="fas fa-print"></i></a></td>
-          <td> <a disabled (click)="this.delete(item.folio, item.especial, item.paga)" class="btn btn-outline-primary"
-              data-bs-target="#staticBackdrop" data-bs-toggle="modal"><i class="fas fa-trash"></i></a>
-          </td>
-        </tr>
-      </tbody>
-
-    </table>
+<app-sidebar-menu bankName="Tickets"></app-sidebar-menu>
+<div class="card m-3 p-3">
+  <div class="input-group pt-2 mt-2">
+    <input type="text" name="tickets" placeholder="Ticket" class="form-control">
+    <a class="btn btn-success"><i class="fas fa-search"></i></a>
+    <a class="btn btn-primary"><i class="fas fa-sync-alt"></i></a>
   </div>
-
+  <table class="table table-borderless pt-2 mt-2">
+    <!-- <caption>Tickets</caption> -->
+    <thead>
+      <tr>
+        <th scope="col">Folio</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Importe</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Imprimir</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of collectionesAbono">
+        <td scope="row" data-label="Folio">{{ item.folio }}</td>
+        <td data-label="Tipo"> Abonos </td>
+        <td data-label="Importe">${{ item.total }}</td>
+        <td data-label="Fecha">{{ item.fecha | date: 'dd/MM/yy' }} </td>
+        <td data-label="Imprimir"><a class="btn btn-outline-dark" data-bs-target="#exampleModalToggle2"
+            data-bs-toggle="modal" (click)="load(item)"><i class="fas fa-print"></i></a></td>
+        <td data-label="Eliminar"><a class="btn btn-outline-primary"
+            (click)="this.delete(item.folio, item.especial, item.paga)" data-bs-target="#staticBackdrop"
+            data-bs-toggle="modal"><i class="fas fa-trash"></i></a></td>
+      </tr>
+      <tr *ngFor="let item of collectionesContado; let i = index">
+        <td scope="row" data-label="Folio">{{ (1+i) }}</td>
+        <td data-label="Tipo"> Contado </td>
+        <td data-label="Importe">${{ item.total }}</td>
+        <td data-label="Fecha">{{ item.fecha | date: 'dd/MM/yy' }} </td>
+        <td data-label="Imprimir"><a class="btn btn-outline-dark" data-bs-target="#exampleModalToggle2"
+            data-bs-toggle="modal" (click)="load(item)"><i class="fas fa-print"></i></a></td>
+        <td data-label="Eliminar"><a class="btn btn-outline-primary"
+            (click)="this.delete(item.folio, item.especial, item.paga)" data-bs-target="#staticBackdrop"
+            data-bs-toggle="modal"><i class="fas fa-trash"></i></a></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <app-ticket></app-ticket>
 <!-- Button trigger modal -->
