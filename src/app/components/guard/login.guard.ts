@@ -19,8 +19,8 @@ export class LoginGuard implements CanActivate {
     if (localStorage.getItem('uid') && localStorage.getItem('email') && localStorage.getItem('date')) {
       const tokenDate = new Date(String(localStorage.getItem('date'))).toLocaleString().split(' ')[0];
       const date = new Date().toLocaleString().split(' ')[0];
-      console.log(tokenDate);
-      console.log(date);
+      // console.log(tokenDate);
+      // console.log(date);
       if (tokenDate != date) {
         this._localStorage.logOut();
        // //  // // console.log('OK : 504');

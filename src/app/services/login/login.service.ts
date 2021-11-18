@@ -12,7 +12,8 @@ export class LoginService {
     estatus: false,
     correo: '',
     apellidos: '',
-    contrasena: ''
+    contrasena: '',
+    fecha: ''
   };
   importe = 0;
   fecha!: Date;

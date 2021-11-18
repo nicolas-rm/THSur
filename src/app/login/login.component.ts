@@ -47,7 +47,8 @@ export class LoginComponent implements OnInit {
       apellidos: '',
       correo: this.Formulario.value.usuario,
       contrasena: this.Formulario.value.contrasena,
-      estatus: true
+      estatus: true,
+      fecha: ''
     }
 
     this._FireStore.readUser(usuario.correo).subscribe((resp) => {

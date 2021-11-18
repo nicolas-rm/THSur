@@ -30,7 +30,7 @@ export class EstadisticasComponent implements OnInit {
       Type: this.pieChartType,
       Legend: 'Reporte Diario',
       colors: this.pieChartColors,
-      active: ''
+      active: 'active'
     },
     grafica3: {
       Labels: ['Tornilleria', 'Servicios', 'Refacciones', 'Ferreteria'],
@@ -70,6 +70,7 @@ export class EstadisticasComponent implements OnInit {
     });
     this.estadisticas.dailyReport('THSureste-Contado').subscribe((resp) => {
       //(resp);
+
       this.dailyReport[0] = resp[0];
       this.dailyReport[1] = resp[1];
       this.dailyReport[2] = resp[2];

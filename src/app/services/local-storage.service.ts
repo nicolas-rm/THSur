@@ -19,6 +19,7 @@ export class LocalStorageService {
     this._login.fecha = new Date();
 
     document.uid = hashSync(document.nombre + document.apellidos + document.contrasena + new Date());
+    document.fecha = String(new Date());
     localStorage.setItem('name', String(`${document.nombre} ${document.apellidos}`));
     localStorage.setItem('date', String(this._login.fecha));
     localStorage.setItem('email', String(document.correo));

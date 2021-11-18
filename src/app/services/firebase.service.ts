@@ -188,12 +188,12 @@ export class FirebaseService {
     return this.users.snapshotChanges().pipe(map((resp) => {
       const documents: Array<Registro> = [];
       resp.forEach((document) => {
-        documents.push(document.payload.doc.data());
+        const doc = document.payload.doc.data();
+        documents.push(doc);
       });
       return documents;
     }));
   }
-
 
   search(collection: string, folio: string) {
     return this.FireStore.collection(collection).doc(folio).snapshotChanges().pipe(map((resp) => {
@@ -214,6 +214,7 @@ export class FirebaseService {
     this.collection = 'THSureste-usuarios';
     return this.FireStore.collection(this.collection).doc(document.correo).set(document);
   }
+
   timerSuccess(text: string) {
     this._notificacion.ngClass = '';
     this._notificacion.text = '';

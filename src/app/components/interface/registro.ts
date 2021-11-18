@@ -5,4 +5,5 @@ export interface Registro {
   contrasena: string;
   estatus: boolean;
   uid?: string;
+  fecha: string | Date;
 }

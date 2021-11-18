@@ -4,6 +4,7 @@ import { LoginService } from '../../../services/login/login.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { convertTimestamp } from 'convert-firebase-timestamp';
 import { EstadisticasService } from '../../../services/estadisticas.service';
+import { FirebaseService } from '../../../services/firebase.service';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -31,12 +32,21 @@ export class SidebarMenuComponent implements OnInit {
   dailyReport: Array<number> = [];
   daily: Array<number> = [];
 
-  constructor(public _login: LoginService, private _localstorage: LocalStorageService, private estadisticas: EstadisticasService) {
+  constructor(public _login: LoginService, private _localstorage: LocalStorageService, private estadisticas: EstadisticasService, private FireStore: FirebaseService) {
     if (localStorage.getItem('uid') && localStorage.getItem('email') && localStorage.getItem('date') && localStorage.getItem('import') && localStorage.getItem('name')) {
       this.cajero = String(localStorage.getItem('name'));
       this.date = String(localStorage.getItem('date'));
       this.import = Number(localStorage.getItem('import'));
+      const email = String(localStorage.getItem('email'));
+      this.FireStore.readUser(email).subscribe((u) => {
+        if (u) {
+          if (!u[0].estatus) {
+            this._localstorage.logOut();
+          }
+        }
+      });
     }
+
 
     this.detec();
   }
