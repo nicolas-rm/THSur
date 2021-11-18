@@ -6,4 +6,5 @@ export interface Registro {
   estatus: boolean;
   uid?: string;
   fecha: string | Date;
+  especial: boolean;
 }

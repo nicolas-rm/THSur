@@ -66,7 +66,8 @@ export class RegisterComponent implements OnInit {
       correo: correo.toLowerCase(),
       contrasena: this.Formulario.value.contrasena,
       estatus: false,
-      fecha: ''
+      fecha: '',
+      especial: false
     }
 
     // alert('PASO LAS VALIDACIONES');

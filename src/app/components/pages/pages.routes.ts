@@ -15,6 +15,7 @@ import { NotificacionesComponent } from '../shared/notificaciones/notificaciones
 import { LoginGuard } from '../guard/login.guard';
 import { TicketsComponent } from './tickets/tickets.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { AdminGuard } from '../guard/admin.guard';
 
 /* ===================================================== */
 /* ==================>> COMPONENTES <<================== */
@@ -59,7 +60,7 @@ const routes: Routes = [
       {
         path: 'usuarios',
         component: UsuariosComponent,
-        canActivate: [LoginGuard],
+        canActivate: [LoginGuard, AdminGuard],
       },
       // /* REDIRECCION */
       { path: '', redirectTo: '/principal', pathMatch: 'full' },

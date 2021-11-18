@@ -48,7 +48,8 @@ export class LoginComponent implements OnInit {
       correo: this.Formulario.value.usuario,
       contrasena: this.Formulario.value.contrasena,
       estatus: true,
-      fecha: ''
+      fecha: '',
+      especial: false
     }
 
     this._FireStore.readUser(usuario.correo).subscribe((resp) => {
@@ -57,6 +58,7 @@ export class LoginComponent implements OnInit {
         if (this._FireStore.decrypt(usuario, resp[0]) && resp[0].estatus === true) {
           // ACTUALIZO EL USUARIO CON EL TOKEN
           usuario = this._localstorage.login(resp[0]);
+          usuario.fecha = String(new Date());
           this._FireStore.updateUser(usuario);
           this.exist = true;
 

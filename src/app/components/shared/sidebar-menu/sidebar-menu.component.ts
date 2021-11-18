@@ -39,7 +39,7 @@ export class SidebarMenuComponent implements OnInit {
       this.import = Number(localStorage.getItem('import'));
       const email = String(localStorage.getItem('email'));
       this.FireStore.readUser(email).subscribe((u) => {
-        if (u) {
+        if (u.length > 0) {
           if (!u[0].estatus) {
             this._localstorage.logOut();
           }

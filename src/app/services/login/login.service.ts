@@ -13,7 +13,8 @@ export class LoginService {
     correo: '',
     apellidos: '',
     contrasena: '',
-    fecha: ''
+    fecha: '',
+    especial: false
   };
   importe = 0;
   fecha!: Date;

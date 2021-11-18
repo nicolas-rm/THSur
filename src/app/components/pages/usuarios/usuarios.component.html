@@ -9,23 +9,35 @@
     <!-- <caption>Tickets</caption> -->
     <thead>
       <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Usuario</th>
-        <th scope="col">Estatus</th>
-        <th scope="col">Admin</th>
-        <th scope="col">Ingreso</th>
+        <th scope="col" class="col-auto">Nombre</th>
+        <th scope="col" class="col-auto">Usuario</th>
+        <th scope="col" class="col-auto">Estatus</th>
+        <th scope="col" class="col-auto">Admin</th>
+        <th scope="col" class="col-auto">Ingreso</th>
+        <th scope="col" class="col-auto">Eliminar</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
         <td scope="row" data-label="Nombre">{{ user.nombre }} {{ user.apellidos }} </td>
         <td data-label="Usuario">{{ user.correo }}</td>
-        <td *ngIf="user.estatus" data-label="Estatus"><a (click)="estatus(user)" class="btn badge bg-success">Activo</a>
+
+        <td *ngIf="user.estatus" data-label="Estatus"><a (click)="estatus(user)"
+            class="btn badge bg-success btn-lg">Activo</a>
         </td>
-        <td data-label="Estatus"><a class="btn badge bg-primary">Administrador</a></td>
         <td *ngIf="!user.estatus" data-label="Estatus"><a (click)="estatus(user)"
-            class="btn badge bg-danger">Inactivo</a></td>
-        <td data-label="Ingreso">{{ user.fecha | date: 'medium'}}</td>
+            class="btn badge bg-danger btn-lg">Inactivo</a></td>
+
+        <td *ngIf="user.especial" data-label="Administrador"><a class="btn badge bg-primary btn-lg"
+            (click)="especial(user)">Administrador</a></td>
+        <td *ngIf="!user.especial" data-label="Administrador"><a class="btn badge bg-danger btn-lg"
+            (click)="especial(user)">Usuario</a>
+        </td>
+        <td *ngIf="user.fecha != ''" data-label="Ingreso">{{ user.fecha | date: 'medium'}}</td>
+        <td *ngIf="user.fecha == ''" data-label="Ingreso">Ninguno Ingreso</td>
+        <td data-label="Eliminar"><a class="btn btn-danger btn-lg" (click)="delete(user)"><i class="fas fa-trash-alt"></i></a>
+        </td>
+
       </tr>
     </tbody>
   </table>

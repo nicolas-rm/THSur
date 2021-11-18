@@ -215,6 +215,11 @@ export class FirebaseService {
     return this.FireStore.collection(this.collection).doc(document.correo).set(document);
   }
 
+  deleteUser(document: Registro) {
+    this.collection = 'THSureste-usuarios';
+    return this.FireStore.collection(this.collection).doc(document.correo).delete();
+  }
+
   timerSuccess(text: string) {
     this._notificacion.ngClass = '';
     this._notificacion.text = '';
