@@ -178,97 +178,97 @@ export class EstadisticasService {
               date[0] = date[2] + '/' + date[1];
 
               if (hoy[0] == date[0]) {
-                ////  // // console.log('entro a mensual');
+                ////  // // // console.log('entro a mensual');
                 if (resp[index].departamento[i] == 'Tornilleria') {
                   if (this.monthlyReportDatos[0]) {
                     this.monthlyReportDatos[0] += resp[index].totales[i];
-                    //  // // console.log('1.- TORNILLERIA: ' + resp[index].totales[i]);
+                    //  // // // console.log('1.- TORNILLERIA: ' + resp[index].totales[i]);
                   }
                   if (!this.monthlyReportDatos[0]) {
                     this.monthlyReportDatos[0] = resp[index].totales[i];
                     // this.monthlyReportDatos[0] += resp[index].totales[i];
-                    //  // // console.log('2.- TORNILLERIA: ' + resp[index].totales[i]);
+                    //  // // // console.log('2.- TORNILLERIA: ' + resp[index].totales[i]);
                   }
                 }
                 if (resp[index].departamento[i] == 'Servicios') {
                   if (this.monthlyReportDatos[1]) {
                     this.monthlyReportDatos[1] += resp[index].totales[i];
-                    //  // // console.log('1.- SERVICIOS: ' + resp[index].totales[i]);
+                    //  // // // console.log('1.- SERVICIOS: ' + resp[index].totales[i]);
                   }
                   if (!this.monthlyReportDatos[1]) {
                     this.monthlyReportDatos[1] = resp[index].totales[i];
                     // this.monthlyReportDatos[1] += resp[index].totales[i];
-                    //  // // console.log('2.- SERVICIOS: ' + resp[index].totales[i]);
+                    //  // // // console.log('2.- SERVICIOS: ' + resp[index].totales[i]);
                   }
                 }
                 if (resp[index].departamento[i] == 'Refacciones') {
                   if (this.monthlyReportDatos[2]) {
                     this.monthlyReportDatos[2] += resp[index].totales[i];
-                    //  // // console.log('1.- REFACCIONES: ' + resp[index].totales[i]);
+                    //  // // // console.log('1.- REFACCIONES: ' + resp[index].totales[i]);
                   }
                   if (!this.monthlyReportDatos[2]) {
                     this.monthlyReportDatos[2] = resp[index].totales[i];
                     // this.monthlyReportDatos[2] += resp[index].totales[i];
-                    //  // // console.log('2.- REFACCIONES: ' + resp[index].totales[i]);
+                    //  // // // console.log('2.- REFACCIONES: ' + resp[index].totales[i]);
                   }
                 }
                 if (resp[index].departamento[i] == 'Ferreteria') {
                   if (this.monthlyReportDatos[3]) {
                     this.monthlyReportDatos[3] += resp[index].totales[i];
-                    //  // // console.log('1.- FERRETERIA: ' + resp[index].totales[i]);
+                    //  // // // console.log('1.- FERRETERIA: ' + resp[index].totales[i]);
                   }
                   if (!this.monthlyReportDatos[3]) {
                     this.monthlyReportDatos[3] = resp[index].totales[i];
                     // this.monthlyReportDatos[3] += ;
-                    //  // // console.log('2.- FERRETERIA: ' + resp[index].totales[i]);
+                    //  // // // console.log('2.- FERRETERIA: ' + resp[index].totales[i]);
                   }
                 }
               }
             }
             if (seccion == 'todo') {
-              ////  // // console.log('entro a todo');
+              ////  // // // console.log('entro a todo');
               if (resp[index].departamento[i] == 'Tornilleria') {
                 if (this.generalReportDatos[0]) {
                   this.generalReportDatos[0] += resp[index].totales[i];
-                  //  // // console.log('1.- TORNILLERIA: ' + resp[index].totales[i]);
+                  //  // // // console.log('1.- TORNILLERIA: ' + resp[index].totales[i]);
                 }
                 if (!this.generalReportDatos[0]) {
                   this.generalReportDatos[0] = resp[index].totales[i];
                   // this.generalReportDatos[0] += resp[index].totales[i];
-                  //  // // console.log('2.- TORNILLERIA: ' + resp[index].totales[i]);
+                  //  // // // console.log('2.- TORNILLERIA: ' + resp[index].totales[i]);
                 }
               }
               if (resp[index].departamento[i] == 'Servicios') {
                 if (this.generalReportDatos[1]) {
                   this.generalReportDatos[1] += resp[index].totales[i];
-                  //  // // console.log('1.- SERVICIOS: ' + resp[index].totales[i]);
+                  //  // // // console.log('1.- SERVICIOS: ' + resp[index].totales[i]);
                 }
                 if (!this.generalReportDatos[1]) {
                   this.generalReportDatos[1] = resp[index].totales[i];
                   // this.generalReportDatos[1] += resp[index].totales[i];
-                  //  // // console.log('2.- SERVICIOS: ' + resp[index].totales[i]);
+                  //  // // // console.log('2.- SERVICIOS: ' + resp[index].totales[i]);
                 }
               }
               if (resp[index].departamento[i] == 'Refacciones') {
                 if (this.generalReportDatos[2]) {
                   this.generalReportDatos[2] += resp[index].totales[i];
-                  //  // // console.log('1.- REFACCIONES: ' + resp[index].totales[i]);
+                  //  // // // console.log('1.- REFACCIONES: ' + resp[index].totales[i]);
                 }
                 if (!this.generalReportDatos[2]) {
                   this.generalReportDatos[2] = resp[index].totales[i];
                   // this.generalReportDatos[2] += resp[index].totales[i];
-                  //  // // console.log('2.- REFACCIONES: ' + resp[index].totales[i]);
+                  //  // // // console.log('2.- REFACCIONES: ' + resp[index].totales[i]);
                 }
               }
               if (resp[index].departamento[i] == 'Ferreteria') {
                 if (this.generalReportDatos[3]) {
                   this.generalReportDatos[3] += resp[index].totales[i];
-                  //  // // console.log('1.- FERRETERIA: ' + resp[index].totales[i]);
+                  //  // // // console.log('1.- FERRETERIA: ' + resp[index].totales[i]);
                 }
                 if (!this.generalReportDatos[3]) {
                   this.generalReportDatos[3] = resp[index].totales[i];
                   // this.generalReportDatos[3] += ;
-                  //  // // console.log('2.- FERRETERIA: ' + resp[index].totales[i]);
+                  //  // // // console.log('2.- FERRETERIA: ' + resp[index].totales[i]);
                 }
               }
             }
@@ -285,7 +285,7 @@ export class EstadisticasService {
         }
       }
     }
-    ////  // // console.log(this.departamentos);
+    ////  // // // console.log(this.departamentos);
   }
 
   dateMonth(month: number, year: number) {

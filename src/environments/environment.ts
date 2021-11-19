@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyAmHdItWJiufXjxzDsa5A0LSGS-MWUT2mw",
-  authDomain: "thsurestetapachula.firebaseapp.com",
-  projectId: "thsurestetapachula",
-  storageBucket: "thsurestetapachula.appspot.com",
-  messagingSenderId: "361282877857",
-  appId: "1:361282877857:web:28231e5ac7c0f16cce73e0",
-  measurementId: "G-YP9ZVP97GE"
+    projectId: 'thsureste-tapachula',
+    appId: '1:670041990580:web:a92d017934bf9ceec57ee1',
+    storageBucket: 'thsureste-tapachula.appspot.com',
+    locationId: 'us-central',
+    apiKey: 'AIzaSyDnhObH_MGPRd8SrSUMf5s23WyotXosJSI',
+    authDomain: 'thsureste-tapachula.firebaseapp.com',
+    messagingSenderId: '670041990580',
   }
 };
 

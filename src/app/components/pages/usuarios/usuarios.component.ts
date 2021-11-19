@@ -12,12 +12,28 @@ export class UsuariosComponent implements OnInit {
   users: Array<Registro> = [];
   constructor(private FireStore: FirebaseService) { }
 
+  usuario: string = '';
+
   ngOnInit(): void {
     this.FireStore.readUsers().subscribe((users) => {
       this.users = users;
     });
   }
 
+  search(usuario: string) {
+
+    if (usuario == ' ' || usuario == '\r' || usuario == '\t' || usuario == '\s' || usuario == '\n' || usuario == null) {
+      this.ngOnInit();
+    }
+    if (usuario.length < 3) {
+      return;
+    }
+
+    this.FireStore.readUser(usuario).subscribe((e) => {
+      this.users = [];
+      this.users = e;
+    });
+  }
 
   estatus(user: Registro) {
     user.estatus = !user.estatus;
@@ -33,7 +49,7 @@ export class UsuariosComponent implements OnInit {
     SWAL_CONFIRMATION('Al Usuario', usuario.nombre).then((eliminar) => {
       if (eliminar) {
         this.FireStore.deleteUser(usuario).then(() => {
-          SWAL_DELETE('Usuario',`${usuario.nombre} ${usuario.apellidos}`);
+          SWAL_DELETE('Usuario', `${usuario.nombre} ${usuario.apellidos}`);
         });
       }
     });

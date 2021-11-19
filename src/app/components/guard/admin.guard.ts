@@ -36,8 +36,8 @@ export class AdminGuard implements CanActivate {
         // this.router.navigate([''])
       }
     });
-    // console.log(this.exist);
-    // console.log(this.user);
+    // // console.log(this.exist);
+    // // console.log(this.user);
     return this.exist;
   }
 

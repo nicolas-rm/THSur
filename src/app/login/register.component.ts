@@ -99,12 +99,12 @@ export class RegisterComponent implements OnInit {
           position: 'center',
           icon: 'error',
           title: 'Usuario',
-          text: 'No Creado, Verifique.!',
+          text: 'Usuario Ya Se Encuentra Registrado.!',
           showConfirmButton: false,
           timer: 2500,
           width: 450
         })
-        // // console.log('USUARIO YA SE ENCUENTRA REGISTRADO');
+        // // // console.log('USUARIO YA SE ENCUENTRA REGISTRADO');
       }
 
     });

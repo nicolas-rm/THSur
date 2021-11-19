@@ -1,9 +1,9 @@
 <app-sidebar-menu bankName="Tickets"></app-sidebar-menu>
 <div class=" m-1 p-1">
   <div class="input-group pt-1 mt-1">
-    <input type="text" name="tickets" placeholder="Ticket" class="form-control">
-    <a class="btn btn-success"><i class="fas fa-search"></i></a>
-    <a class="btn btn-primary"><i class="fas fa-sync-alt"></i></a>
+    <input type="text" name="usuario" placeholder="Usuario" class="form-control btn-lg" [(ngModel)]="usuario" (keypress)="search(this.usuario)">
+    <a class="btn btn-success btn-lg" (click)="search(this.usuario)" ><i class="fas fa-search btn-lg"></i></a>
+    <a class="btn btn-primary btn-lg" (click)="ngOnInit()"><i class="fas fa-sync-alt btn-lg"></i></a>
   </div>
   <table class="table table-borderless pt-1 mt-1">
     <!-- <caption>Tickets</caption> -->

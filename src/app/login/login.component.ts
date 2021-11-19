@@ -25,8 +25,7 @@ export class LoginComponent implements OnInit {
     }
     this.Formulario = new FormGroup({
       usuario: new FormControl(null, Validators.required),
-      contrasena: new FormControl(null, Validators.required),
-      recordar: new FormControl()
+      contrasena: new FormControl(null, Validators.required)
     });
   }
 
@@ -55,7 +54,7 @@ export class LoginComponent implements OnInit {
 
     this._FireStore.readUser(usuario.correo).subscribe((resp) => {
       this.exist = false;
-      console.log(resp);
+      // console.log(resp);
       if (resp.length > 0) {
         this.exist = false;
         if (this._FireStore.decrypt(usuario, resp[0]) && resp[0].estatus === true) {
@@ -66,19 +65,22 @@ export class LoginComponent implements OnInit {
           this.exist = true;
 
           // redirecciona
-          this._router.navigate(['/principal']);
+          this._router.navigate(['/principal']).then(()=>{
+
+          });
+
           return;
         }
       }
 
       if (resp.length == 0 && !this.exist) {
         this.exist = true;
-        console.log('USUARIO NO EXISTE.!');
+        // console.log('USUARIO NO EXISTE.!');
         return;
       }
       if (!this._FireStore.decrypt(usuario, resp[0]) && !this.exist) {
         this.exist = true;
-        SWAL_ERROR('Usuario o Contraseña Incorrecta', 2500);
+        // SWAL_ERROR('Usuario o Contraseña Incorrecta', 2500);
         return;
       }
     });

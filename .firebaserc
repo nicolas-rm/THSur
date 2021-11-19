@@ -1,5 +1,14 @@
 {
   "projects": {
-    "default": "thsurestetapachula"
+    "default": "thsureste-tapachula"
+  },
+  "targets": {
+    "thsureste-tapachula": {
+      "hosting": {
+        "THSURESTE": [
+          "thsureste-tapachula"
+        ]
+      }
+    }
   }
 }

@@ -28,7 +28,7 @@ export class TicketComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.condicion = true;
 
-    // // console.log('ngOnDestroy');
+    // // // console.log('ngOnDestroy');
   }
 
   ngOnInit(): void {
@@ -40,7 +40,7 @@ export class TicketComponent implements OnInit, OnDestroy {
   prinit() {
     const finish = this.saveCollection();
     const onbeforeprint = () => {
-      //  //// //  // // console.log('Impresion en proceso!.');
+      //  //// //  // // // console.log('Impresion en proceso!.');
       finish;
       return true;
     };
@@ -102,7 +102,7 @@ export class TicketComponent implements OnInit, OnDestroy {
     };
 
     this.readCollection(collection);
-    // console.log(this._ticket.valores.especial);
+    // // console.log(this._ticket.valores.especial);
     // this.restablecer();
     // document.getElementById('ticketClose')?.click();
 
