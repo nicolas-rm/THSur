@@ -60,7 +60,7 @@ const routes: Routes = [
       {
         path: 'usuarios',
         component: UsuariosComponent,
-        canActivate: [LoginGuard, AdminGuard],
+        canActivate: [AdminGuard],
       },
       // /* REDIRECCION */
       { path: '', redirectTo: '/principal', pathMatch: 'full' },

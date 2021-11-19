@@ -149,7 +149,7 @@ export class ModalComponent implements OnInit {
     }
 
     this._ticket.valores.abonado.push(this._ticket.valores.paga);
-
+    this._ticket.valores.fecha = new Date();
 
 
   }

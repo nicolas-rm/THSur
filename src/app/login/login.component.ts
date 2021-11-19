@@ -4,7 +4,8 @@ import { FirebaseService } from '../services/firebase.service';
 import { Registro } from '../components/interface/registro';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../services/local-storage.service';
-import { LoginService } from '../services/login/login.service';
+import Swal from 'sweetalert2';
+
 // 3200 16
 @Component({
   selector: 'app-login',
@@ -53,8 +54,10 @@ export class LoginComponent implements OnInit {
     }
 
     this._FireStore.readUser(usuario.correo).subscribe((resp) => {
-      //// //  // // console.log(resp);
+      this.exist = false;
+      console.log(resp);
       if (resp.length > 0) {
+        this.exist = false;
         if (this._FireStore.decrypt(usuario, resp[0]) && resp[0].estatus === true) {
           // ACTUALIZO EL USUARIO CON EL TOKEN
           usuario = this._localstorage.login(resp[0]);
@@ -64,11 +67,19 @@ export class LoginComponent implements OnInit {
 
           // redirecciona
           this._router.navigate(['/principal']);
+          return;
         }
+      }
 
-        if (resp && !this.exist) {
-          // //  // // console.log('USUARIO O CONTRASEÑA INCORRECTA.!');
-        }
+      if (resp.length == 0 && !this.exist) {
+        this.exist = true;
+        console.log('USUARIO NO EXISTE.!');
+        return;
+      }
+      if (!this._FireStore.decrypt(usuario, resp[0]) && !this.exist) {
+        this.exist = true;
+        SWAL_ERROR('Usuario o Contraseña Incorrecta', 2500);
+        return;
       }
     });
   }
@@ -78,3 +89,22 @@ export class LoginComponent implements OnInit {
   }
 
 }
+export const SWAL_ERROR = (leyenda: string, time: number) => {
+  const Toast = Swal.mixin({
+    toast: true,
+    // width: 250,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: time,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    }
+  });
+
+  Toast.fire({
+    icon: 'error',
+    title: leyenda
+  });
+};

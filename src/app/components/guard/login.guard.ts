@@ -14,7 +14,7 @@ export class LoginGuard implements CanActivate {
   }
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
 
-   // //  // // console.log('Paso Por El Login Guard');
+    // //  // // console.log('Paso Por El Login Guard');
 
     if (localStorage.getItem('uid') && localStorage.getItem('email') && localStorage.getItem('date')) {
       const tokenDate = new Date(String(localStorage.getItem('date'))).toLocaleString().split(' ')[0];
@@ -23,7 +23,7 @@ export class LoginGuard implements CanActivate {
       // console.log(date);
       if (tokenDate != date) {
         this._localStorage.logOut();
-       // //  // // console.log('OK : 504');
+        // //  // // console.log('OK : 504');
         this._router.navigate(['/inicio']);
       }
 
@@ -33,7 +33,7 @@ export class LoginGuard implements CanActivate {
             localStorage.removeItem('uid')
             localStorage.setItem('uid', String(resp[0].uid))
             this.exist = true;
-           // //  // // console.log('OK : 200');
+            console.log('OK : 200');
             this._router.navigate(['/principal']);
           } else {
             this._router.navigate(['/inicio']);
@@ -41,12 +41,12 @@ export class LoginGuard implements CanActivate {
         }
 
         if (resp.length == 0 && !this.exist) {
-         // //  // // console.log('OK : 500');
+          // //  // // console.log('OK : 500');
           this._router.navigate(['/inicio']);
         }
       });
     } else {
-     // //  // // console.log('OK : 404');
+      // //  // // console.log('OK : 404');
       // this._localStorage.logOut();
       this._router.navigate(['/inicio']);
     }

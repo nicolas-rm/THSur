@@ -14,7 +14,7 @@ export class TicketComponent implements OnInit, OnDestroy {
   // @HostListener('window:afterprint')
   cajero: string = ''
   @Input() bankName: string = '';
-  date: any = new Date();
+  // date: any = new Date();
   exist = false;
   condicion = true;
   abonosArray: Array<any> = [];
@@ -35,10 +35,6 @@ export class TicketComponent implements OnInit, OnDestroy {
     this.condicion = true;
 
     this.cajero = String(localStorage.getItem('name'));
-    //(this._ticket.valores.fecha);
-    if (this._ticket.valores.fecha) {
-      this.date = this._ticket.valores.fecha;
-    }
   }
 
   prinit() {

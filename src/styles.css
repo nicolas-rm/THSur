@@ -85,6 +85,8 @@
     /* font-size: 10px; */
     /* Remove scrollbar for printing. */
   }
+
+
   .modal-dialog {
     visibility: visible !important;
     overflow: visible !important;

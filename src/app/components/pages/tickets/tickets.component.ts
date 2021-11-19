@@ -97,7 +97,7 @@ export class TicketsComponent implements OnInit {
       }
     }
     // // console.log(ticket.fecha);
-    // this._ticket.valores.fecha = ticket.fecha;
+    this._ticket.valores.fecha = ticket.fecha;
     this._ticket.reimprimir = true;
   }
   tornilleria(value: any): void {
